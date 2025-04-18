@@ -8,10 +8,10 @@
         <div class="fp__breadcrumb_overlay">
             <div class="container">
                 <div class="fp__breadcrumb_text">
-                    <h1>Our Latest Food Blogs</h1>
+                    <h1>Latest Products</h1>
                     <ul>
                         <li><a href="index.html">home</a></li>
-                        <li><a href="#">blogs</a></li>
+                        <li><a href="#">Categories</a></li>
                     </ul>
                 </div>
             </div>
