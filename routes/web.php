@@ -50,6 +50,26 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('chat/get-conversation/{senderId}',[ChatController::class, 'getConversation'])->name('chat.get-conversation');
 });
 
+ /** Seller Auth Routes */
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('admin/login', [AdminAuthController::class, 'index'])->name('admin.login');
+    Route::get('admin/forget-password', [AdminAuthController::class, 'forgetPassword'])->name('admin.forget-password');
+});
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::put('profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::put('profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+    Route::post('profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
+    Route::post('address', [DashboardController::class, 'createAddress'])->name('address.store');
+    Route::put('address/{id}/edit', [DashboardController::class, 'updateAddress'])->name('address.update');
+    Route::delete('address/{id}', [DashboardController::class, 'destroyAddress'])->name('address.destroy');   
+
+    /** Chat Routes */
+    Route::post('chat/send-message', [ChatController::class, 'sendMessage'])->name('chat.send-message');
+    Route::get('chat/get-conversation/{senderId}',[ChatController::class, 'getConversation'])->name('chat.get-conversation');
+});
+
 require __DIR__.'/auth.php';
 
 /** Show Home page */
