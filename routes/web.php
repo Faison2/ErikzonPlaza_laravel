@@ -18,7 +18,13 @@ use App\Models\ProductOption;
 use App\Models\ProductSize;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
+use App\Models\Seller;
+use App\Models\SellerProduct;
+use App\Models\SellerProductOption;
+use App\Models\SellerProductSize;
+use App\Models\SellerProductSizeOption;
+use App\Models\SellerProductSizeOptionValue;        
+use App\Http\Controllers\Admin\SellerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +35,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('sellers', SellerController::class);
+});
 
 /** Admin Auth Routes */
 Route::group(['middleware' => 'guest'], function () {
