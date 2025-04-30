@@ -38,7 +38,8 @@ class AuthenticatedSessionController extends Controller
         $role = $user->role; // Ensure 'role' exists on the user model
 
         if ($role === 'admin') {
-            return redirect()->intended(RouteServiceProvider::ADMIN);
+            return redirect()->intended('/admin/dashboard');
+           // return redirect()->intended(RouteServiceProvider::ADMIN);
         } elseif ($role === 'seller') {
             return redirect()->intended('/seller/dashboard');
         } elseif ($role === 'customer') {
