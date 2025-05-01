@@ -26,7 +26,9 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         // Only run this if not in console and the settings table exists
-        if (!App::runningInConsole() && Schema::hasTable('settings')) {
+        if (!App::runningInConsole()) {
+    try {
+        if (Schema::hasTable('settings')) {
             $keys = ['pusher_app_id', 'pusher_cluster', 'pusher_key', 'pusher_secret'];
             $pusherConf = Setting::whereIn('key', $keys)->pluck('value', 'key');
 
@@ -35,5 +37,10 @@ class AppServiceProvider extends ServiceProvider
             config(['broadcasting.connections.pusher.app_id' => $pusherConf['pusher_app_id'] ?? '']);
             config(['broadcasting.connections.pusher.options.cluster' => $pusherConf['pusher_cluster'] ?? '']);
         }
+    } catch (\Throwable $e) {
+        // Silently ignore if DB or table not ready
+    }
+}
+
     }
 }
