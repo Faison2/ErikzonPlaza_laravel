@@ -12,9 +12,13 @@
             <div class="row justify-content-between">
                 <div class="col-lg-4 col-sm-8 col-md-6">
                     <div class="fp__footer_content">
-                        <a class="footer_logo" href="index.html">
+                        <!-- <a class="footer_logo" href="index.html">
                             <img src="{{ asset(config('settings.footer_logo')) }}" alt="FoodPark" class="img-fluid w-100">
+                        </a> -->
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                      <img src="{{ asset('frontend/images/footer_logo.svg') }}" alt="EricksonPlaza" class="img-fluid">
                         </a>
+
                         @if (@$footerInfo->short_info)
                         <span>{{ @$footerInfo->short_info }}</span>
                         @endif

@@ -3,13 +3,12 @@
         <div class="row wow fadeInUp" data-wow-duration="1s">
             <div class="col-md-8 col-lg-7 col-xl-6 m-auto text-center">
                 <div class="fp__section_heading mb_45">
-                    <h4>food Menu</h4>
-                    <h2>Our Popular Delicious Foods</h2>
+                    <h4>Categories</h4>
+                    <h2>Which section do want to visit to day?</h2>
                     <span>
                         <img src="images/heading_shapes.png" alt="shapes" class="img-fluid w-100">
                     </span>
-                    <p>Objectively pontificate quality models before intuitive information. Dramatically
-                        recaptiualize multifunctional materials.</p>
+                    <p>Click on any of the categories below for quick ilter.</p>
                 </div>
             </div>
         </div>

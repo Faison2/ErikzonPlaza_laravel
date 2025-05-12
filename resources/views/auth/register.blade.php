@@ -21,7 +21,6 @@
         BREADCRUMB END
     ==============================-->
 
-
     <!--=========================
         SIGN UP START
     ==========================-->
@@ -31,39 +30,57 @@
                 <div class="row wow fadeInUp" data-wow-duration="1s">
                     <div class="col-xxl-5 col-xl-6 col-md-9 col-lg-7 m-auto">
                         <div class="fp__login_area">
-                            <h2>Welcome back!</h2>
+                            <h3>EricksonPlaza Welcomes You</h3>
                             <p>sign up to continue</p>
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
-                                            <label>name</label>
+                                            <label>Name</label>
                                             <input type="text" placeholder="Name" name="name" value="{{ old('name') }}">
                                         </div>
                                     </div>
 
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
-                                            <label>email</label>
+                                            <label>Email</label>
                                             <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
                                         </div>
                                     </div>
 
-
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
-                                            <label>password</label>
+                                            <label>Password</label>
                                             <input type="password" name="password" placeholder="Password">
                                         </div>
                                     </div>
+
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
-                                            <label>confirm password</label>
+                                            <label>Confirm Password</label>
                                             <input type="password" name="password_confirmation" placeholder="Confirm Password">
                                         </div>
                                     </div>
 
+                                    <!-- User Type Dropdown -->
+                                    <div class="col-xl-12">
+                                        <div class="fp__login_imput">
+                                            <label>Register As</label>
+                                            <select name="user_type" id="user_type" class="form-control">
+                                                <option value="customer" {{ old('user_type') === 'customer' ? 'selected' : '' }}>Customer</option>
+                                                <option value="seller" {{ old('user_type') === 'seller' ? 'selected' : '' }}>Seller</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Business Address (Only for Sellers) -->
+                                    <div class="col-xl-12" id="business_address_field" style="display: none;">
+                                        <div class="fp__login_imput">
+                                            <label>Business Address</label>
+                                            <input type="text" name="business_address" placeholder="Business Address" value="{{ old('business_address') }}">
+                                        </div>
+                                    </div>
 
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
@@ -73,8 +90,7 @@
                                 </div>
                             </form>
                             <p class="or"><span>or</span></p>
-
-                            <p class="create_account">Dont’t have an aceount ? <a href="{{ route('login') }}">login</a></p>
+                            <p class="create_account">Already have an account <a href="{{ route('login') }}">login</a></p>
                         </div>
                     </div>
                 </div>
@@ -85,3 +101,23 @@
         SIGN UP END
     ==========================-->
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const userType = document.getElementById('user_type');
+        const businessField = document.getElementById('business_address_field');
+
+        function toggleBusinessField() {
+            if (userType.value === 'seller') {
+                businessField.style.display = 'block';
+            } else {
+                businessField.style.display = 'none';
+            }
+        }
+
+        userType.addEventListener('change', toggleBusinessField);
+        toggleBusinessField(); // Run on page load in case of old input
+    });
+</script>
+@endpush

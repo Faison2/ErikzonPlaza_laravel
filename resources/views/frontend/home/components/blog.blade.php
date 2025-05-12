@@ -4,8 +4,8 @@
             <div class="row wow fadeInUp" data-wow-duration="1s">
                 <div class="col-md-8 col-lg-7 col-xl-6 m-auto text-center">
                     <div class="fp__section_heading mb_25">
-                        <h4>news & blogs</h4>
-                        <h2>our latest foods blog</h2>
+                        <h4>news</h4>
+                        <h2>Promotions and other articles</h2>
                         <span>
                             <img src="images/heading_shapes.png" alt="shapes" class="img-fluid w-100">
                         </span>
