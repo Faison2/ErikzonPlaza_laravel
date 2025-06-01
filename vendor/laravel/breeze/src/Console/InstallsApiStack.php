@@ -82,6 +82,8 @@ trait InstallsApiStack
         // Remove frontend related files...
         $files->delete(base_path('package.json'));
         $files->delete(base_path('vite.config.js'));
+        $files->delete(base_path('tailwind.config.js'));
+        $files->delete(base_path('postcss.config.js'));
 
         // Remove Laravel "welcome" view...
         $files->delete(resource_path('views/welcome.blade.php'));
@@ -90,5 +92,8 @@ trait InstallsApiStack
         // Remove CSS and JavaScript directories...
         $files->deleteDirectory(resource_path('css'));
         $files->deleteDirectory(resource_path('js'));
+
+        // Remove the "node_modules" directory and associated lock files...
+        static::flushNodeModules();
     }
 }

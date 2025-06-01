@@ -171,7 +171,22 @@
                         @endif
                         <p class="total"><span>total:</span> <span id="grand_total">{{ currencyPosition(grandCartTotal()) }}</span></p>
 
-                        <a class="common_btn" id="procced_pmt_button" href=" #">Proceed to Payment</a>
+{{--                        commented by Donnie for Paynow Intergration--}}
+{{--                        <a class="common_btn" id="procced_pmt_button" href=" #">Proceed to Payment</a>--}}
+
+                        <form method="POST" action="{{ route('paynow.initiate') }}">
+                            @csrf
+                            <div class="row">
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                <div class="col-md-12 mb-3">
+                                    <input type="text" name="amount" value="{{ grandCartTotal() }}">
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-success btn-sm">Proceed to Pay</button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>

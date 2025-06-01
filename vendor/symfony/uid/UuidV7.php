@@ -11,6 +11,8 @@
 
 namespace Symfony\Component\Uid;
 
+use Symfony\Component\Uid\Exception\InvalidArgumentException;
+
 /**
  * A v7 UUID is lexicographically sortable and contains a 48-bit timestamp and 74 extra unique bits.
  *
@@ -55,7 +57,7 @@ class UuidV7 extends Uuid implements TimeBasedUidInterface
             $time = microtime(false);
             $time = substr($time, 11).substr($time, 2, 3);
         } elseif (0 > $time = $time->format('Uv')) {
-            throw new \InvalidArgumentException('The timestamp must be positive.');
+            throw new InvalidArgumentException('The timestamp must be positive.');
         }
 
         if ($time > self::$time || (null !== $mtime && $time !== self::$time)) {
@@ -113,7 +115,7 @@ class UuidV7 extends Uuid implements TimeBasedUidInterface
             $time = bin2hex(BinaryUtil::fromBase($time, BinaryUtil::BASE10));
         }
 
-        return substr_replace(sprintf('%012s-%04x-%04x-%04x%04x%04x',
+        return substr_replace(\sprintf('%012s-%04x-%04x-%04x%04x%04x',
             $time,
             0x7000 | (self::$rand[1] << 2) | (self::$rand[2] >> 14),
             0x8000 | (self::$rand[2] & 0x3FFF),

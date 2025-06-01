@@ -1,6 +1,35 @@
 Changelog
 =========
 
+2.0.15
+------
+
+### Overview of changes
+- Update bundled certificates as of 2024-12-31. [#919]
+- General housekeeping.
+
+[#919]: https://github.com/WordPress/Requests/pull/919
+
+2.0.14
+------
+
+### Overview of changes
+- Update bundled certificates as of 2024-11-26. [#910]
+- Confirmed compatibility with PHP 8.4.
+    No new changes were needed, so Request 2.0.11 and higher can be considered compatible with PHP 8.4.
+- Various other general housekeeping.
+
+[#910]: https://github.com/WordPress/Requests/pull/910
+
+2.0.13
+------
+
+### Overview of changes
+- Update bundled certificates as of 2024-09-24. [#900]
+- Various minor documentation improvements and other general housekeeping.
+
+[#900]: https://github.com/WordPress/Requests/pull/900
+
 2.0.12
 ------
 

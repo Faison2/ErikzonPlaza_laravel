@@ -76,7 +76,7 @@ class DataTableExportJob implements ShouldBeUnique, ShouldQueue
 
         /** @var DataTable $oTable */
         $oTable = resolve($this->dataTable);
-        request()->merge($this->request);
+        request()->replace($this->request);
 
         $query = app()->call([$oTable->with($this->attributes), 'query']);
 
@@ -149,6 +149,11 @@ class DataTableExportJob implements ShouldBeUnique, ShouldQueue
                 /** @var array|bool|int|string|null|DateTimeInterface $value */
                 $value = $row[$property] ?? '';
 
+                if (isset($column->exportRender)) {
+                    $callback = $column->exportRender;
+                    $value = $callback($row, $value);
+                }
+
                 if (is_array($value)) {
                     $value = json_encode($value);
                 }
@@ -196,7 +201,7 @@ class DataTableExportJob implements ShouldBeUnique, ShouldQueue
         $writer->close();
 
         if ($this->getS3Disk()) {
-            Storage::disk($this->getS3Disk())->putFileAs('', (new File($path)), $filename);
+            Storage::disk($this->getS3Disk())->putFileAs('tmp', (new File($path)), $filename);
         }
 
         $emailTo = request('emailTo');

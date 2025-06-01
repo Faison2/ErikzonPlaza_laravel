@@ -31,4 +31,23 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+
+    'resend' => [
+        'key' => env('RESEND_KEY'),
+    ],
+
+    'slack' => [
+        'notifications' => [
+            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
+            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
+        ],
+    ],
+
+    'paynow' => [
+        'integration_id' => env('PAYNOW_INTEGRATION_ID'),
+        'integration_key' => env('PAYNOW_INTEGRATION_KEY'),
+        'callback_url' => 'http://127.0.0.1:8000/dashboard',
+        'return_url' => env('PAYNOW_RETURN_URL'),
+    ],
+
 ];

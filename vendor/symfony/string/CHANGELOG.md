@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+7.3
+---
+
+ * Add the `AbstractString::pascal()` method
+
+7.2
+---
+
+ * Add `TruncateMode` enum to handle more truncate methods
+ * Add the `AbstractString::kebab()` method
+
 7.1
 ---
 

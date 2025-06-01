@@ -3,7 +3,6 @@
 namespace Yajra\DataTables\Html;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Fluent;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Html\Options\Plugins\SearchPanes;
 
@@ -29,6 +28,7 @@ use Yajra\DataTables\Html\Options\Plugins\SearchPanes;
  * @property string $contentPadding
  * @property string $createdCell
  * @property string $exportFormat
+ * @property callable $exportRender
  *
  * @see https://datatables.net/reference/option/#columns
  */

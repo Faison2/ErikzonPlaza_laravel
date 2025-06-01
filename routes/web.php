@@ -138,6 +138,12 @@ Route::group(['middleware' => 'auth'], function(){
     /** Stripe Routes */
     Route::get('razorpay-redirect', [PaymentController::class, 'razorpayRedirect'])->name('razorpay-redirect');
     Route::post('razorpay/payment', [PaymentController::class, 'payWithRazorpay'])->name('razorpay.payment');
+
+    // Paynow Routes
+    Route::post('/payment/initiate', [\App\Http\Controllers\Paynow\PaynowController::class, 'initiate'])->name('paynow.initiate');
+    Route::match(['get', 'post'], '/payment/update', [\App\Http\Controllers\Paynow\PaynowController::class, 'update'])->name('paynow.update');
+    Route::get('/payment/return', [\App\Http\Controllers\Paynow\PaynowController::class, 'return'])->name('paynow.return');
+
 });
 
 

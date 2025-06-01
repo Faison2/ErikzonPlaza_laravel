@@ -19,6 +19,8 @@ use Symfony\Component\VarDumper\Cloner\Stub;
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @final
+ *
+ * @internal since Symfony 7.3
  */
 class PgSqlCaster
 {
@@ -131,8 +133,8 @@ class PgSqlCaster
         for ($i = 0; $i < $fields; ++$i) {
             $field = [
                 'name' => pg_field_name($result, $i),
-                'table' => sprintf('%s (OID: %s)', pg_field_table($result, $i), pg_field_table($result, $i, true)),
-                'type' => sprintf('%s (OID: %s)', pg_field_type($result, $i), pg_field_type_oid($result, $i)),
+                'table' => \sprintf('%s (OID: %s)', pg_field_table($result, $i), pg_field_table($result, $i, true)),
+                'type' => \sprintf('%s (OID: %s)', pg_field_type($result, $i), pg_field_type_oid($result, $i)),
                 'nullable' => (bool) pg_field_is_null($result, $i),
                 'storage' => pg_field_size($result, $i).' bytes',
                 'display' => pg_field_prtlen($result, $i).' chars',

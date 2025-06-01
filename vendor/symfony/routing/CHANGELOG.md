@@ -1,6 +1,18 @@
 CHANGELOG
 =========
 
+7.3
+---
+
+ * Allow aliases and deprecations in `#[Route]` attribute
+ * Add the `Requirement::MONGODB_ID` constant to validate MongoDB ObjectIDs in hexadecimal format
+
+7.2
+---
+
+ * Add the `Requirement::UID_RFC9562` constant to validate UUIDs in the RFC 9562 format
+ * Deprecate the `AttributeClassLoader::$routeAnnotationClass` property
+
 7.1
 ---
 

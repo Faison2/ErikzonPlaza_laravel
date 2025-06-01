@@ -9,6 +9,7 @@
  */
 namespace PHPUnit\TextUI\Output;
 
+use const PHP_EOL;
 use function assert;
 use PHPUnit\Event\EventFacadeIsSealedException;
 use PHPUnit\Event\Facade as EventFacade;
@@ -28,6 +29,8 @@ use SebastianBergmann\Timer\Duration;
 use SebastianBergmann\Timer\ResourceUsageFormatter;
 
 /**
+ * @no-named-arguments Parameter names are not covered by the backward compatibility promise for PHPUnit
+ *
  * @internal This class is not covered by the backward compatibility promise for PHPUnit
  */
 final class Facade
@@ -203,16 +206,16 @@ final class Facade
                 self::$printer,
                 true,
                 true,
-                true,
+                $configuration->displayDetailsOnPhpunitDeprecations() || $configuration->displayDetailsOnAllIssues(),
                 false,
                 false,
                 true,
                 false,
                 false,
-                $configuration->displayDetailsOnTestsThatTriggerDeprecations(),
-                $configuration->displayDetailsOnTestsThatTriggerErrors(),
-                $configuration->displayDetailsOnTestsThatTriggerNotices(),
-                $configuration->displayDetailsOnTestsThatTriggerWarnings(),
+                $configuration->displayDetailsOnTestsThatTriggerDeprecations() || $configuration->displayDetailsOnAllIssues(),
+                $configuration->displayDetailsOnTestsThatTriggerErrors() || $configuration->displayDetailsOnAllIssues(),
+                $configuration->displayDetailsOnTestsThatTriggerNotices() || $configuration->displayDetailsOnAllIssues(),
+                $configuration->displayDetailsOnTestsThatTriggerWarnings() || $configuration->displayDetailsOnAllIssues(),
                 $configuration->reverseDefectList(),
             );
         }
@@ -236,16 +239,16 @@ final class Facade
             self::$printer,
             true,
             true,
+            $configuration->displayDetailsOnPhpunitDeprecations() || $configuration->displayDetailsOnAllIssues(),
             true,
             true,
             true,
-            true,
-            $configuration->displayDetailsOnIncompleteTests(),
-            $configuration->displayDetailsOnSkippedTests(),
-            $configuration->displayDetailsOnTestsThatTriggerDeprecations(),
-            $configuration->displayDetailsOnTestsThatTriggerErrors(),
-            $configuration->displayDetailsOnTestsThatTriggerNotices(),
-            $configuration->displayDetailsOnTestsThatTriggerWarnings(),
+            $configuration->displayDetailsOnIncompleteTests() || $configuration->displayDetailsOnAllIssues(),
+            $configuration->displayDetailsOnSkippedTests() || $configuration->displayDetailsOnAllIssues(),
+            $configuration->displayDetailsOnTestsThatTriggerDeprecations() || $configuration->displayDetailsOnAllIssues(),
+            $configuration->displayDetailsOnTestsThatTriggerErrors() || $configuration->displayDetailsOnAllIssues(),
+            $configuration->displayDetailsOnTestsThatTriggerNotices() || $configuration->displayDetailsOnAllIssues(),
+            $configuration->displayDetailsOnTestsThatTriggerWarnings() || $configuration->displayDetailsOnAllIssues(),
             $configuration->reverseDefectList(),
         );
     }

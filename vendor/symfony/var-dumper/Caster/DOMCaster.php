@@ -19,11 +19,13 @@ use Symfony\Component\VarDumper\Cloner\Stub;
  * @author Nicolas Grekas <p@tchwork.com>
  *
  * @final
+ *
+ * @internal since Symfony 7.3
  */
 class DOMCaster
 {
     private const ERROR_CODES = [
-        \DOM_PHP_ERR => 'DOM_PHP_ERR',
+        0 => 'DOM_PHP_ERR',
         \DOM_INDEX_SIZE_ERR => 'DOM_INDEX_SIZE_ERR',
         \DOMSTRING_SIZE_ERR => 'DOMSTRING_SIZE_ERR',
         \DOM_HIERARCHY_REQUEST_ERR => 'DOM_HIERARCHY_REQUEST_ERR',
@@ -143,16 +145,12 @@ class DOMCaster
             'doctype' => $dom->doctype,
             'implementation' => $dom->implementation,
             'documentElement' => new CutStub($dom->documentElement),
-            'actualEncoding' => $dom->actualEncoding,
             'encoding' => $dom->encoding,
             'xmlEncoding' => $dom->xmlEncoding,
-            'standalone' => $dom->standalone,
             'xmlStandalone' => $dom->xmlStandalone,
-            'version' => $dom->version,
             'xmlVersion' => $dom->xmlVersion,
             'strictErrorChecking' => $dom->strictErrorChecking,
             'documentURI' => $dom->documentURI ? new LinkStub($dom->documentURI) : $dom->documentURI,
-            'config' => $dom->config,
             'formatOutput' => $dom->formatOutput,
             'validateOnParse' => $dom->validateOnParse,
             'resolveExternals' => $dom->resolveExternals,
@@ -294,9 +292,6 @@ class DOMCaster
             'publicId' => $dom->publicId,
             'systemId' => $dom->systemId,
             'notationName' => $dom->notationName,
-            'actualEncoding' => $dom->actualEncoding,
-            'encoding' => $dom->encoding,
-            'version' => $dom->version,
         ];
 
         return $a;

@@ -55,7 +55,7 @@ class QuestionHelper extends Helper
         }
 
         $inputStream = $input instanceof StreamableInputInterface ? $input->getStream() : null;
-        $inputStream ??= STDIN;
+        $inputStream ??= \STDIN;
 
         try {
             if (!$question->getValidator()) {
@@ -211,7 +211,7 @@ class QuestionHelper extends Helper
         foreach ($choices as $key => $value) {
             $padding = str_repeat(' ', $maxWidth - self::width($key));
 
-            $messages[] = sprintf("  [<$tag>%s$padding</$tag>] %s", $key, $value);
+            $messages[] = \sprintf("  [<$tag>%s$padding</$tag>] %s", $key, $value);
         }
 
         return $messages;
