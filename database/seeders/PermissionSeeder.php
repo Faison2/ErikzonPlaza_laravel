@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -45,6 +46,12 @@ class PermissionSeeder extends Seeder
                     'created_at' => Carbon::now()->toDateTimeString(),
                 ]);
             }
+        });
+
+        $users = User::query()->get();
+
+        collect($users)->each(function ($user) {
+            $user->assignRole($user['role']);
         });
     }
 }
