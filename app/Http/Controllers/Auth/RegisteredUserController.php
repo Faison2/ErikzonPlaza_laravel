@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use function redirect;
+use function strtolower;
 
 class RegisteredUserController extends Controller
 {
@@ -40,11 +42,30 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->user_type
+        ]);
+
+        /**
+         * @var User $user
+        */
+
+        $user->assignRole($request->user_type);
+
+        $user->seller()->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'business_address' => $request->business_address
         ]);
 
         event(new Registered($user));
 
+        $user = $user->fresh();
+
         Auth::login($user);
+
+        if ($user->isSeller()) {
+            return redirect(RouteServiceProvider::ADMIN);
+        }
 
         return redirect(RouteServiceProvider::HOME);
     }

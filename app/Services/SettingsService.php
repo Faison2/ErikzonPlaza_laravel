@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Setting;
-use Cache;
+use Illuminate\Support\Facades\Cache;
 
 class SettingsService
 {

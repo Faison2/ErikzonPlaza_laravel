@@ -59,6 +59,7 @@ class ProductController extends Controller
         $product->seo_description = $request->seo_description;
         $product->show_at_home = $request->show_at_home;
         $product->status = $request->status;
+        $product->user_id = auth()->user()->id;
         $product->save();
 
         toastr()->success('Create Successfully');

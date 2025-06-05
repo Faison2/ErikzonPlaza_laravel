@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Traits\CommonModelRelationships;
+use App\Traits\UserCreatedTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,11 +14,12 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use CommonModelRelationships;
     use HasApiTokens;
     use HasFactory;
     use HasRoles;
     use Notifiable;
+    use CommonModelRelationships;
+    use UserCreatedTrait;
 
     /**
      * The attributes that are mass assignable.

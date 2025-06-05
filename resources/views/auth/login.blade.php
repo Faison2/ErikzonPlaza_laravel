@@ -37,14 +37,6 @@
                                 @csrf
                                 <div class="row">
                                 <div class="col-xl-12">
-                                        <div class="fp__login_imput">
-                                            <label>Login As</label>
-                                            <select name="role" id="role" class="nice-select" required>
-                                                <option value="admin">Admin</option>
-                                                <option value="seller">Seller</option>
-                                                <option value="customer">Customer</option>
-                                            </select>
-                                        </div>
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <label>email</label>
@@ -59,7 +51,7 @@
                                         </div>
                                     </div>
 
-                                    
+
                                     </div>
 
                                     <div class="col-xl-12">

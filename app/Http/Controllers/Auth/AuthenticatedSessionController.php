@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use function auth;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -31,23 +32,14 @@ class AuthenticatedSessionController extends Controller
         // Regenerate session to prevent fixation
         $request->session()->regenerate();
 
-        // Get the authenticated user
-        $user = Auth::user();
-
-        // Redirect based on user role
-        $role = $user->role; // Ensure 'role' exists on the user model
-
-        if ($role === 'admin') {
-            return redirect()->intended('/admin/dashboard');
-            // return redirect()->intended(RouteServiceProvider::ADMIN);
-        } elseif ($role === 'seller') {
-            return redirect()->intended('/seller/dashboard');
-        } elseif ($role === 'customer') {
-            return redirect()->intended(RouteServiceProvider::HOME);
+        if (auth()->user()->isAdminOrSeller()) {
+            return redirect('/admin/dashboard');
+        }  elseif (auth()->user()->isCustomer()) {
+            return redirect(RouteServiceProvider::HOME);
         }
 
         // Default fallback redirect
-        return redirect()->intended('/');
+        return redirect('/');
     }
 
     /**
