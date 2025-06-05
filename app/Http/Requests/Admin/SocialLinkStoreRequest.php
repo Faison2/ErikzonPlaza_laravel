@@ -24,8 +24,8 @@ class SocialLinkStoreRequest extends FormRequest
         return [
             'icon' => ['required'],
             'name' => ['required'],
-            'link' => ['required',],
-            'status' => ['required', 'boolean']
+            'link' => ['required'],
+            'status' => ['required', 'boolean'],
         ];
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateMenuItemsWpTable extends Migration
 {
@@ -13,7 +13,7 @@ class CreateMenuItemsWpTable extends Migration
      */
     public function up()
     {
-        Schema::create( config('menu.table_prefix') . config('menu.table_name_items') , function (Blueprint $table) {
+        Schema::create(config('menu.table_prefix').config('menu.table_name_items'), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('label');
             $table->string('link');
@@ -25,7 +25,7 @@ class CreateMenuItemsWpTable extends Migration
             $table->timestamps();
 
             $table->foreign('menu_id')->references('id')
-                ->on(config('menu.table_prefix') . config('menu.table_name_menus'))
+                ->on(config('menu.table_prefix').config('menu.table_name_menus'))
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -38,6 +38,6 @@ class CreateMenuItemsWpTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists( config('menu.table_prefix') . config('menu.table_name_items'));
+        Schema::dropIfExists(config('menu.table_prefix').config('menu.table_name_items'));
     }
 }

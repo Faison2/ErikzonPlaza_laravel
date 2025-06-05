@@ -26,7 +26,7 @@ class AboutUpdateRequest extends FormRequest
             'title' => ['required', 'max:255'],
             'main_title' => ['required', 'max:255'],
             'description' => ['required'],
-            'video_link' => ['required', 'url']
+            'video_link' => ['required', 'url'],
         ];
     }
 }

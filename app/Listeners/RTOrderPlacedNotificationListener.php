@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\RTOrderPlacedNotificationEvent;
 use App\Models\OrderPlacedNotification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class RTOrderPlacedNotificationListener
 {

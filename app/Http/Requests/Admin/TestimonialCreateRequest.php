@@ -28,7 +28,7 @@ class TestimonialCreateRequest extends FormRequest
             'rating' => ['required', 'integer', 'max:5'],
             'review' => ['required', 'max:1000'],
             'show_at_home' => ['required', 'boolean'],
-            'status' => ['required', 'boolean']
+            'status' => ['required', 'boolean'],
         ];
     }
 }

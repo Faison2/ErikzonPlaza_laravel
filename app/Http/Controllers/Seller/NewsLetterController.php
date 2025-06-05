@@ -13,14 +13,16 @@ use Mail;
 
 class NewsLetterController extends Controller
 {
-    function index(SubscriberDataTable $dataTable) : View|JsonResponse {
+    public function index(SubscriberDataTable $dataTable): View|JsonResponse
+    {
         return $dataTable->render('admin.news-letter.index');
     }
 
-    function sendNewsLetter(Request $request) {
+    public function sendNewsLetter(Request $request)
+    {
         $request->validate([
             'subject' => ['required', 'max:255'],
-            'message' => ['required']
+            'message' => ['required'],
         ]);
 
         $subscribers = Subscriber::pluck('email')->toArray();

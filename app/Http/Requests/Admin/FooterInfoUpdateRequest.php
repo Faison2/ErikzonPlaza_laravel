@@ -24,9 +24,9 @@ class FooterInfoUpdateRequest extends FormRequest
         return [
             'short_info' => ['nullable', 'max:2000'],
             'address' => ['nullable', 'max:255'],
-            'phone' =>['nullable', 'max:255'],
-            'email' =>['nullable', 'max:255'],
-            'copyright' =>['nullable', 'max:255']
+            'phone' => ['nullable', 'max:255'],
+            'email' => ['nullable', 'max:255'],
+            'copyright' => ['nullable', 'max:255'],
         ];
     }
 }

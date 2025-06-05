@@ -29,7 +29,7 @@ class CouponCreateRequest extends FormRequest
             'expire_date' => ['required', 'date'],
             'discount_type' => ['required'],
             'discount' => ['required'],
-            'status' => ['required', 'boolean']
+            'status' => ['required', 'boolean'],
         ];
     }
 }

@@ -6,7 +6,6 @@ use App\DataTables\DeliveryAreaDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DeliveryAreaCreateRequest;
 use App\Models\DeliveryArea;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DeliveryAreaController extends Controller
@@ -51,6 +50,7 @@ class DeliveryAreaController extends Controller
     public function edit(string $id)
     {
         $area = DeliveryArea::findOrFail($id);
+
         return view('admin.delivery-area.edit', compact('area'));
 
     }
@@ -82,7 +82,7 @@ class DeliveryAreaController extends Controller
             DeliveryArea::findOrFail($id)->delete();
 
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }
     }

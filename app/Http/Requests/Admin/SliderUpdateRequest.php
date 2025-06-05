@@ -28,7 +28,7 @@ class SliderUpdateRequest extends FormRequest
             'sub_title' => ['required', 'max:255'],
             'short_description' => ['required', 'max:255'],
             'button_link' => ['nullable', 'max:255'],
-            'status' => ['boolean']
+            'status' => ['boolean'],
         ];
     }
 }

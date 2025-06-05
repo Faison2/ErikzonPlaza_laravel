@@ -15,6 +15,6 @@ class Contact extends Model
         'mail_one',
         'mail_two',
         'address',
-        'map_link'
+        'map_link',
     ];
 }

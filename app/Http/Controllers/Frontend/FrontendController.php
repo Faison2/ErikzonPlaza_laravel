@@ -35,11 +35,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Mail;
 
-use function Ramsey\Uuid\v1;
-
 class FrontendController extends Controller
 {
-    function index() : View {
+    public function index(): View
+    {
         $sectionTitles = $this->getSectionTitles();
 
         $sliders = Slider::where('status', 1)->get();
@@ -51,7 +50,7 @@ class FrontendController extends Controller
         $appSection = AppDownloadSection::first();
         $testimonials = Testimonial::where(['show_at_home' => 1, 'status' => 1])->get();
         $counter = Counter::first();
-        $latestBlogs = Blog::withCount(['comments' => function($query){
+        $latestBlogs = Blog::withCount(['comments' => function ($query) {
             $query->where('status', 1);
         }])->with(['category', 'user'])->where('status', 1)->latest()->take(3)->get();
 
@@ -71,7 +70,8 @@ class FrontendController extends Controller
             ));
     }
 
-    function getSectionTitles() : Collection {
+    public function getSectionTitles(): Collection
+    {
         $keys = [
             'why_choose_top_title',
             'why_choose_main_title',
@@ -84,23 +84,28 @@ class FrontendController extends Controller
             'chef_sub_title',
             'testimonial_top_title',
             'testimonial_main_title',
-            'testimonial_sub_title'
+            'testimonial_sub_title',
         ];
 
-        return SectionTitle::whereIn('key', $keys)->pluck('value','key');
+        return SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
     }
 
-    function chef() : View {
+    public function chef(): View
+    {
         $chefs = Chef::where(['status' => 1])->paginate(12);
+
         return view('frontend.pages.chefs', compact('chefs'));
     }
 
-    function testimonial() : View {
+    public function testimonial(): View
+    {
         $testimonials = Testimonial::where(['status' => 1])->paginate(9);
+
         return view('frontend.pages.testimonial', compact('testimonials'));
     }
 
-    function about() : View {
+    public function about(): View
+    {
         $keys = [
             'why_choose_top_title',
             'why_choose_main_title',
@@ -110,10 +115,10 @@ class FrontendController extends Controller
             'chef_sub_title',
             'testimonial_top_title',
             'testimonial_main_title',
-            'testimonial_sub_title'
+            'testimonial_sub_title',
         ];
 
-        $sectionTitles = SectionTitle::whereIn('key', $keys)->pluck('value','key');;
+        $sectionTitles = SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
         $about = About::first();
         $whyChooseUs = WhyChooseUs::where('status', 1)->get();
         $chefs = Chef::where(['show_at_home' => 1, 'status' => 1])->get();
@@ -123,27 +128,34 @@ class FrontendController extends Controller
         return view('frontend.pages.about', compact('about', 'whyChooseUs', 'sectionTitles', 'chefs', 'counter', 'testimonials'));
     }
 
-    function privacyPolicy() : View {
+    public function privacyPolicy(): View
+    {
         $privacyPolicy = PrivacyPolicy::first();
+
         return view('frontend.pages.privacy-policy', compact('privacyPolicy'));
     }
 
-    function tramsAndConditions() : View {
+    public function tramsAndConditions(): View
+    {
         $tramsAndConditions = TramsAndCondition::first();
+
         return view('frontend.pages.trams-and-condition', compact('tramsAndConditions'));
     }
 
-    function contact() : View {
+    public function contact(): View
+    {
         $contact = Contact::first();
+
         return view('frontend.pages.contact', compact('contact'));
     }
 
-    function sendContactMessage(Request $request) {
+    public function sendContactMessage(Request $request)
+    {
         $request->validate([
             'name' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:255'],
             'subject' => ['required', 'max:255'],
-            'message' => ['required', 'max: 1000']
+            'message' => ['required', 'max: 1000'],
         ]);
 
         Mail::send(new ContactMail($request->name, $request->email, $request->subject, $request->message));
@@ -151,30 +163,33 @@ class FrontendController extends Controller
         return response(['status' => 'success', 'message' => 'Message Sent Successfully!']);
     }
 
-    function blog(Request $request) : View {
-        $blogs = Blog::withCount(['comments'=> function($query){
+    public function blog(Request $request): View
+    {
+        $blogs = Blog::withCount(['comments' => function ($query) {
             $query->where('status', 1);
         }])->with(['category', 'user'])->where('status', 1);
 
-        if($request->has('search') && $request->filled('search')){
-            $blogs->where(function($query) use ($request) {
+        if ($request->has('search') && $request->filled('search')) {
+            $blogs->where(function ($query) use ($request) {
                 $query->where('title', 'like', '%'.$request->search.'%')
                     ->orWhere('description', 'like', '%'.$request->search.'%');
             });
         }
 
-        if($request->has('category') && $request->filled('category')) {
-            $blogs->whereHas('category', function($query) use ($request){
+        if ($request->has('category') && $request->filled('category')) {
+            $blogs->whereHas('category', function ($query) use ($request) {
                 $query->where('slug', $request->category);
             });
         }
 
         $blogs = $blogs->latest()->paginate(9);
         $categories = BlogCategory::where('status', 1)->get();
+
         return view('frontend.pages.blog', compact('blogs', 'categories'));
     }
 
-    function blogDetails(string $slug) : View {
+    public function blogDetails(string $slug): View
+    {
         $blog = Blog::with(['user'])->where('slug', $slug)->where('status', 1)->firstOrFail();
         $comments = $blog->comments()->where('status', 1)->orderBy('id', 'DESC')->paginate(20);
 
@@ -182,20 +197,20 @@ class FrontendController extends Controller
             ->where('status', 1)
             ->where('id', '!=', $blog->id)
             ->latest()->take(5)->get();
-        $categories = BlogCategory::withCount(['blogs' => function($query){
+        $categories = BlogCategory::withCount(['blogs' => function ($query) {
             $query->where('status', 1);
         }])->where('status', 1)->get();
 
         $nextBlog = Blog::select('id', 'title', 'slug', 'image')->where('id', '>', $blog->id)->orderBy('id', 'ASC')->first();
         $previousBlog = Blog::select('id', 'title', 'slug', 'image')->where('id', '<', $blog->id)->orderBy('id', 'DESC')->first();
 
-
         return view('frontend.pages.blog-details', compact('blog', 'latestBlogs', 'categories', 'nextBlog', 'previousBlog', 'comments'));
     }
 
-    function blogCommentStore(Request $request, string $blog_id) : RedirectResponse {
+    public function blogCommentStore(Request $request, string $blog_id): RedirectResponse
+    {
         $request->validate([
-            'comment' => ['required', 'max:500']
+            'comment' => ['required', 'max:500'],
         ]);
 
         Blog::findOrFail($blog_id);
@@ -207,19 +222,21 @@ class FrontendController extends Controller
         $comment->save();
 
         toastr()->success('Comment submitted successfully and waiting to approve.');
+
         return redirect()->back();
     }
 
-    function reservation(Request $request) {
+    public function reservation(Request $request)
+    {
         $request->validate([
             'name' => ['required', 'max:255'],
             'phone' => ['required', 'max:50'],
             'date' => ['required', 'date'],
             'time' => ['required'],
-            'persons' => ['required', 'numeric']
+            'persons' => ['required', 'numeric'],
         ]);
 
-        if(!Auth::check()){
+        if (! Auth::check()) {
             throw ValidationException::withMessages(['Please Login to Request Reservation']);
         }
 
@@ -237,10 +254,10 @@ class FrontendController extends Controller
         return response(['status' => 'success', 'message' => 'Request send successfully']);
     }
 
-    function subscribeNewsletter(Request $request) : Response
+    public function subscribeNewsletter(Request $request): Response
     {
         $request->validate([
-            'email' => ['required', 'email', 'max:255', 'unique:subscribers,email']
+            'email' => ['required', 'email', 'max:255', 'unique:subscribers,email'],
         ], ['email.unique' => 'Email is already subscribed!']);
 
         $subscriber = new Subscriber();
@@ -250,19 +267,20 @@ class FrontendController extends Controller
         return response(['status' => 'success', 'message' => 'Subscribed Successfully!']);
     }
 
-    function products(Request $request) : View {
+    public function products(Request $request): View
+    {
 
         $products = Product::where(['status' => 1])->orderBy('id', 'DESC');
 
-        if($request->has('search') && $request->filled('search')) {
-            $products->where(function($query) use ($request) {
+        if ($request->has('search') && $request->filled('search')) {
+            $products->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%'.$request->search.'%')
                     ->orWhere('long_description', 'like', '%'.$request->search.'%');
             });
         }
 
-        if($request->has('category') && $request->filled('category')) {
-            $products->whereHas('category', function($query) use ($request){
+        if ($request->has('category') && $request->filled('category')) {
+            $products->whereHas('category', function ($query) use ($request) {
                 $query->where('slug', $request->category);
             });
         }
@@ -274,11 +292,12 @@ class FrontendController extends Controller
         return view('frontend.pages.product', compact('products', 'categories'));
     }
 
-    function showProduct(string $slug) : View {
+    public function showProduct(string $slug): View
+    {
         $product = Product::with(['productImages', 'productSizes', 'productOptions'])->where(['slug' => $slug, 'status' => 1])
-        ->withAvg('reviews', 'rating')
-        ->withCount('reviews')
-        ->firstOrFail();
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
+            ->firstOrFail();
 
         $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)->take(8)
@@ -286,37 +305,39 @@ class FrontendController extends Controller
             ->withCount('reviews')
             ->latest()->get();
         $reviews = ProductRating::where(['product_id' => $product->id, 'status' => 1])->paginate(30);
+
         return view('frontend.pages.product-view', compact('product', 'relatedProducts', 'reviews'));
     }
 
-    function loadProductModal($productId) {
+    public function loadProductModal($productId)
+    {
         $product = Product::with(['productSizes', 'productOptions'])->findOrFail($productId);
 
         return view('frontend.layouts.ajax-files.product-popup-modal', compact('product'))->render();
     }
 
-    function productReviewStore(Request $request) {
+    public function productReviewStore(Request $request)
+    {
         $request->validate([
             'rating' => ['required', 'min:1', 'max:5', 'integer'],
             'review' => ['required', 'max:500'],
-            'product_id' => ['required', 'integer']
+            'product_id' => ['required', 'integer'],
         ]);
 
         $user = Auth::user();
 
-        $hasPurchased = $user->orders()->whereHas('orderItems', function($query) use ($request){
+        $hasPurchased = $user->orders()->whereHas('orderItems', function ($query) use ($request) {
             $query->where('product_id', $request->product_id);
         })
-        ->where('order_status', 'delivered')
-        ->get();
+            ->where('order_status', 'delivered')
+            ->get();
 
-
-        if(count($hasPurchased) == 0){
+        if (count($hasPurchased) == 0) {
             throw ValidationException::withMessages(['Please Buy The Product Before Submit a Review!']);
         }
 
         $alreadyReviewed = ProductRating::where(['user_id' => $user->id, 'product_id' => $request->product_id])->exists();
-        if($alreadyReviewed){
+        if ($alreadyReviewed) {
             throw ValidationException::withMessages(['You already reviewed this product']);
         }
 
@@ -333,26 +354,27 @@ class FrontendController extends Controller
         return redirect()->back();
     }
 
-    function applyCoupon(Request $request) {
+    public function applyCoupon(Request $request)
+    {
 
         $subtotal = $request->subtotal;
         $code = $request->code;
 
         $coupon = Coupon::where('code', $code)->first();
 
-        if(!$coupon) {
+        if (! $coupon) {
             return response(['message' => 'Invalid Coupon Code.'], 422);
         }
-        if($coupon->quantity <= 0){
+        if ($coupon->quantity <= 0) {
             return response(['message' => 'Coupon has been fully redeemed.'], 422);
         }
-        if($coupon->expire_date < now()){
+        if ($coupon->expire_date < now()) {
             return response(['message' => 'Coupon hs expired.'], 422);
         }
 
-        if($coupon->discount_type === 'percent') {
+        if ($coupon->discount_type === 'percent') {
             $discount = number_format($subtotal * ($coupon->discount / 100), 2);
-        }elseif ($coupon->discount_type === 'amount'){
+        } elseif ($coupon->discount_type === 'amount') {
             $discount = number_format($coupon->discount, 2);
         }
 
@@ -364,12 +386,15 @@ class FrontendController extends Controller
 
     }
 
-    function destroyCoupon() {
-        try{
+    public function destroyCoupon()
+    {
+        try {
             session()->forget('coupon');
+
             return response(['message' => 'Coupon Removed!', 'grand_cart_total' => grandCartTotal()]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             logger($e);
+
             return response(['message' => 'Something went wrong']);
 
         }

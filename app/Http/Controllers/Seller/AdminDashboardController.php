@@ -11,11 +11,10 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
 {
-    function index(TodaysOrderDataTable $dataTable) : View|JsonResponse
+    public function index(TodaysOrderDataTable $dataTable): View|JsonResponse
     {
         $todaysOrders = Order::whereDate('created_at', now()->format('Y-m-d'))->count();
         $todaysEarnings = Order::whereDate('created_at', now()->format('Y-m-d'))->where('order_status', 'delivered')->sum('grand_total');
@@ -34,7 +33,7 @@ class AdminDashboardController extends Controller
 
         $totalProducts = Product::count();
         $totalBlogs = Blog::count();
-        
+
         return $dataTable->render('admin.dashboard.index', compact(
             'todaysOrders',
             'todaysEarnings',
@@ -51,10 +50,12 @@ class AdminDashboardController extends Controller
         ));
     }
 
-    function clearNotification() {
+    public function clearNotification()
+    {
         $notification = OrderPlacedNotification::query()->update(['seen' => 1]);
 
         toastr()->success('Notification Cleared Successfully!');
+
         return redirect()->back();
     }
 }

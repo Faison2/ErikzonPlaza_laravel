@@ -21,7 +21,7 @@ class ProductFactory extends Factory
             'name' => fake()->word(),
             'slug' => fake()->slug(),
             'thumb_image' => '/uploads/test.jpg',
-            'category_id' => function(){
+            'category_id' => function () {
                 return Category::inRandomOrder()->first()->id;
             },
             'short_description' => fake()->paragraph(),

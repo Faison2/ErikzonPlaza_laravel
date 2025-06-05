@@ -9,17 +9,18 @@ use App\Traits\FileUploadTrait;
 use Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     use FileUploadTrait;
 
-    function index() : View {
+    public function index(): View
+    {
         return view('admin.profile.index');
     }
 
-    function updateProfile(ProfileUpdateRequest $request) : RedirectResponse {
+    public function updateProfile(ProfileUpdateRequest $request): RedirectResponse
+    {
 
         $user = Auth::user();
 
@@ -35,7 +36,8 @@ class ProfileController extends Controller
         return redirect()->back();
     }
 
-    function updatePassword(ProfilePasswordUpdateRequest $request) : RedirectResponse {
+    public function updatePassword(ProfilePasswordUpdateRequest $request): RedirectResponse
+    {
 
         $user = Auth::user();
         $user->password = bcrypt($request->password);

@@ -12,9 +12,10 @@ class CustomPageController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(string $slug) : View
+    public function __invoke(string $slug): View
     {
         $page = CustomPageBuilder::where(['slug' => $slug, 'status' => 1])->firstOrFail();
+
         return view('frontend.pages.custom-page', compact('page'));
     }
 }

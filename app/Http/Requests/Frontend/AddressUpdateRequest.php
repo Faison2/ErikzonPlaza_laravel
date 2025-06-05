@@ -14,7 +14,7 @@ class AddressUpdateRequest extends FormRequest
     {
         $addressId = $this->route('id');
 
-        $address = Address::find( $addressId);
+        $address = Address::find($addressId);
 
         return $address && $address->user_id === auth()->user()->id;
     }
@@ -33,7 +33,7 @@ class AddressUpdateRequest extends FormRequest
             'phone' => ['required', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
             'address' => ['required'],
-            'type' => ['required', 'in:home,office']
+            'type' => ['required', 'in:home,office'],
         ];
     }
 }

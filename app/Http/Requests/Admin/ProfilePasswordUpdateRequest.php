@@ -23,13 +23,14 @@ class ProfilePasswordUpdateRequest extends FormRequest
     {
         return [
             'current_password' => ['required', 'current_password'],
-            'password' => ['required', 'min:5', 'confirmed']
+            'password' => ['required', 'min:5', 'confirmed'],
         ];
     }
 
-    function messages() : array {
+    public function messages(): array
+    {
         return [
-            'current_password.current_password' => 'Current Password is invalid!'
+            'current_password.current_password' => 'Current Password is invalid!',
         ];
     }
 }

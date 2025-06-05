@@ -5,19 +5,19 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Wishlist;
 use Auth;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
 class WishlistController extends Controller
 {
-    function store(string $productId) : Response {
+    public function store(string $productId): Response
+    {
 
         $productAlreadyExist = Wishlist::where(['user_id' => auth()->user()->id, 'product_id' => $productId])->exists();
-        if($productAlreadyExist){
+        if ($productAlreadyExist) {
             throw ValidationException::withMessages(['Product is already add to wishlist ']);
         }
-        if(!Auth::check()){
+        if (! Auth::check()) {
             throw ValidationException::withMessages(['Please login for add product in wishlist']);
         }
 

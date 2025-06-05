@@ -8,8 +8,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class ProductRatingDataTable extends DataTable
@@ -17,24 +15,24 @@ class ProductRatingDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function($query){
+            ->addColumn('action', function ($query) {
                 $delete = "<a href='".route('admin.product-reviews.destroy', $query->id)."' class='btn btn-danger delete-item ml-2'><i class='fas fa-trash'></i></a>";
 
                 return $delete;
             })
-            ->addColumn('user_name', function($query){
+            ->addColumn('user_name', function ($query) {
                 return $query->user->name;
             })
-            ->addColumn('product', function($query){
+            ->addColumn('product', function ($query) {
                 return $query->product->name;
             })
-            ->addColumn('status', function($query){
-                $html ='<select class="form-control review_status" data-id="'.$query->id.'">
+            ->addColumn('status', function ($query) {
+                $html = '<select class="form-control review_status" data-id="'.$query->id.'">
                 <option '.($query->status === 0 ? 'selected' : '').' value="0">Pending</option>
                 <option '.($query->status === 1 ? 'selected' : '').' value="1">Approved</option>
                 </select>';
@@ -59,20 +57,20 @@ class ProductRatingDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('productrating-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
+            ->setTableId('productrating-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload'),
+            ]);
     }
 
     /**
@@ -90,10 +88,10 @@ class ProductRatingDataTable extends DataTable
             Column::make('status')->width(100),
 
             Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->width(60)
-            ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 
@@ -102,6 +100,6 @@ class ProductRatingDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'ProductRating_' . date('YmdHis');
+        return 'ProductRating_'.date('YmdHis');
     }
 }

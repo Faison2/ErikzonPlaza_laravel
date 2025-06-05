@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TestimonialCreateRequest;
 use App\Http\Requests\Admin\TestimonialUpdateRequest;
 use App\Models\SectionTitle;
-use App\Models\Tesimonial;
 use App\Models\Testimonial;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\JsonResponse;
@@ -19,20 +18,22 @@ use Illuminate\View\View;
 class TestimonialController extends Controller
 {
     use FileUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
-    public function index(TestimonialDataTable $dataTable) : View|JsonResponse
+    public function index(TestimonialDataTable $dataTable): View|JsonResponse
     {
         $keys = ['testimonial_top_title', 'testimonial_main_title', 'testimonial_sub_title'];
-        $titles = SectionTitle::whereIn('key', $keys)->pluck('value','key');
+        $titles = SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
+
         return $dataTable->render('admin.testimonial.index', compact('titles'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         return view('admin.testimonial.create');
     }
@@ -40,7 +41,7 @@ class TestimonialController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TestimonialCreateRequest $request) : RedirectResponse
+    public function store(TestimonialCreateRequest $request): RedirectResponse
     {
         $imagePath = $this->uploadImage($request, 'image');
 
@@ -65,6 +66,7 @@ class TestimonialController extends Controller
     public function edit(string $id)
     {
         $testimonial = Testimonial::findOrFail($id);
+
         return view('admin.testimonial.edit', compact('testimonial'));
     }
 
@@ -76,7 +78,7 @@ class TestimonialController extends Controller
         $imagePath = $this->uploadImage($request, 'image', $request->old_image);
 
         $testimonial = Testimonial::findOrFail($id);
-        $testimonial->image = !empty($imagePath) ? $imagePath : $request->old_image;
+        $testimonial->image = ! empty($imagePath) ? $imagePath : $request->old_image;
         $testimonial->name = $request->name;
         $testimonial->title = $request->title;
         $testimonial->rating = $request->rating;
@@ -93,10 +95,10 @@ class TestimonialController extends Controller
     public function updateTitle(Request $request)
     {
         $validatedData = $request->validate([
-                    'testimonial_top_title' => ['max:100'],
-                    'testimonial_main_title' => ['max:200'],
-                    'testimonial_sub_title' => ['max:500']
-                ]);
+            'testimonial_top_title' => ['max:100'],
+            'testimonial_main_title' => ['max:200'],
+            'testimonial_sub_title' => ['max:500'],
+        ]);
         foreach ($validatedData as $key => $value) {
             SectionTitle::updateOrCreate(
                 ['key' => $key],
@@ -104,18 +106,20 @@ class TestimonialController extends Controller
             );
         }
         toastr()->success('Updated Successfully!');
+
         return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) : Response
+    public function destroy(string $id): Response
     {
         try {
             $testimonial = Testimonial::findOrFail($id);
             $this->removeImage($testimonial->image);
             $testimonial->delete();
+
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);

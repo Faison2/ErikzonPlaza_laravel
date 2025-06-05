@@ -12,8 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 
-use function Termwind\render;
-
 class DailyOfferController extends Controller
 {
     /**
@@ -22,13 +20,15 @@ class DailyOfferController extends Controller
     public function index(DailyOfferDataTable $dataTable): View|JsonResponse
     {
         $keys = ['daily_offer_top_title', 'daily_offer_main_title', 'daily_offer_sub_title'];
-        $titles = SectionTitle::whereIn('key', $keys)->pluck('value','key');
+        $titles = SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
+
         return $dataTable->render('admin.daily-offer.index', compact('titles'));
     }
 
-    function productSearch(Request $request): Response
+    public function productSearch(Request $request): Response
     {
-        $product = Product::select('id', 'name', 'thumb_image')->where('name', 'LIKE', '%' . $request->search . '%')->get();
+        $product = Product::select('id', 'name', 'thumb_image')->where('name', 'LIKE', '%'.$request->search.'%')->get();
+
         return response($product);
     }
 
@@ -47,7 +47,7 @@ class DailyOfferController extends Controller
     {
         $request->validate([
             'product' => ['required', 'integer'],
-            'status' => ['required', 'boolean']
+            'status' => ['required', 'boolean'],
         ]);
 
         $offer = new DailyOffer();
@@ -66,6 +66,7 @@ class DailyOfferController extends Controller
     public function edit(string $id)
     {
         $dailyOffer = DailyOffer::with('product')->findOrFail($id);
+
         return view('admin.daily-offer.edit', compact('dailyOffer'));
     }
 
@@ -76,7 +77,7 @@ class DailyOfferController extends Controller
     {
         $request->validate([
             'product' => ['required', 'integer'],
-            'status' => ['required', 'boolean']
+            'status' => ['required', 'boolean'],
         ]);
 
         $offer = DailyOffer::findOrFail($id);
@@ -92,10 +93,10 @@ class DailyOfferController extends Controller
     public function updateTitle(Request $request)
     {
         $validatedData = $request->validate([
-                    'daily_offer_top_title' => ['max:100'],
-                    'daily_offer_main_title' => ['max:200'],
-                    'daily_offer_sub_title' => ['max:500']
-                ]);
+            'daily_offer_top_title' => ['max:100'],
+            'daily_offer_main_title' => ['max:200'],
+            'daily_offer_sub_title' => ['max:500'],
+        ]);
 
         foreach ($validatedData as $key => $value) {
             SectionTitle::updateOrCreate(
@@ -117,6 +118,7 @@ class DailyOfferController extends Controller
         try {
             $dailyOffer = DailyOffer::findOrFail($id);
             $dailyOffer->delete();
+
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);

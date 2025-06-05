@@ -6,18 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ContactUpdateRequest;
 use App\Models\Contact;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ContactController extends Controller
 {
-    function index(): View
+    public function index(): View
     {
         $contact = Contact::first();
+
         return view('admin.contact.index', compact('contact'));
     }
 
-    function update(ContactUpdateRequest $request): RedirectResponse
+    public function update(ContactUpdateRequest $request): RedirectResponse
     {
         Contact::updateOrCreate(
             ['id' => 1],
@@ -27,7 +27,7 @@ class ContactController extends Controller
                 'mail_one' => $request->mail_one,
                 'mail_two' => $request->mail_two,
                 'address' => $request->address,
-                'map_link' => $request->map_link
+                'map_link' => $request->map_link,
             ]
         );
 

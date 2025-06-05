@@ -8,8 +8,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class ProductDataTable extends DataTable
@@ -17,12 +15,12 @@ class ProductDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function($query){
+            ->addColumn('action', function ($query) {
                 $edit = "<a href='".route('admin.product.edit', $query->id)."' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
                 $delete = "<a href='".route('admin.product.destroy', $query->id)."' class='btn btn-danger delete-item mx-2'><i class='fas fa-trash'></i></a>";
 
@@ -36,30 +34,30 @@ class ProductDataTable extends DataTable
 
                 return $edit.$delete.$more;
             })
-            ->addColumn('price', function($query){
+            ->addColumn('price', function ($query) {
                 return currencyPosition($query->price);
             })
-            ->addColumn('offer_price', function($query){
+            ->addColumn('offer_price', function ($query) {
                 return currencyPosition($query->offer_price);
             })
-            ->addColumn('status', function($query){
-                if($query->status === 1){
+            ->addColumn('status', function ($query) {
+                if ($query->status === 1) {
                     return '<span class="badge badge-primary">Active</span>';
-                }else {
+                } else {
                     return '<span class="badge badge-danger">InActive</span>';
                 }
             })
-            ->addColumn('show_at_home', function($query){
-                if($query->show_at_home === 1){
+            ->addColumn('show_at_home', function ($query) {
+                if ($query->show_at_home === 1) {
                     return '<span class="badge badge-primary">Yes</span>';
-                }else {
+                } else {
                     return '<span class="badge badge-danger">No</span>';
                 }
             })
-            ->addColumn('image', function($query){
+            ->addColumn('image', function ($query) {
                 return '<img width="60px" src="'.asset($query->thumb_image).'">';
             })
-            ->addColumn('category', function($query){
+            ->addColumn('category', function ($query) {
                 return $query->category->name;
             })
             ->rawColumns(['offer_price', 'price', 'status', 'show_at_home', 'action', 'image'])
@@ -80,20 +78,20 @@ class ProductDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('product-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
+            ->setTableId('product-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->orderBy(0)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload'),
+            ]);
     }
 
     /**
@@ -113,10 +111,10 @@ class ProductDataTable extends DataTable
             Column::make('show_at_home'),
             Column::make('status'),
             Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->width(150)
-            ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(150)
+                ->addClass('text-center'),
         ];
     }
 
@@ -125,6 +123,6 @@ class ProductDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Product_' . date('YmdHis');
+        return 'Product_'.date('YmdHis');
     }
 }

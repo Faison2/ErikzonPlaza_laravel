@@ -23,7 +23,7 @@ class SliderFactory extends Factory
             'sub_title' => fake()->sentence(10),
             'short_description' => fake()->paragraph(2),
             'button_link' => fake()->url(),
-            'status' => fake()->boolean()
+            'status' => fake()->boolean(),
         ];
     }
 }

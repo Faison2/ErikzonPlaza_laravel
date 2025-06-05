@@ -25,12 +25,12 @@ class BlogUpdateRequest extends FormRequest
 
         return [
             'image' => ['nullable', 'image'],
-            'title' => ['required', 'max:255', 'unique:blogs,title,'. $id],
+            'title' => ['required', 'max:255', 'unique:blogs,title,'.$id],
             'category' => ['required'],
             'description' => ['required'],
             'seo_title' => ['max:255'],
             'seo_description' => ['max:255'],
-            'status' => ['required', 'boolean']
+            'status' => ['required', 'boolean'],
         ];
     }
 }

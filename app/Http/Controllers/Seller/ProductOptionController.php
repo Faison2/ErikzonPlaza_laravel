@@ -13,13 +13,13 @@ class ProductOptionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required', 'max:255'],
             'price' => ['required', 'numeric'],
-            'product_id' => ['required', 'integer']
-        ],[
+            'product_id' => ['required', 'integer'],
+        ], [
             'name.required' => 'Product option name is required',
             'name.max' => 'Product option max length is 255',
             'price.required' => 'Product option price is required',
@@ -37,18 +37,17 @@ class ProductOptionController extends Controller
         return redirect()->back();
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) : Response
+    public function destroy(string $id): Response
     {
-        try{
+        try {
             $image = ProductOption::findOrFail($id);
             $image->delete();
 
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }
     }

@@ -1,5 +1,7 @@
 <?php
+
 // filepath: app\Http\Controllers\Admin\SellerController.php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -11,6 +13,7 @@ class SellerController extends Controller
     public function index()
     {
         $sellers = Seller::all();
+
         return view('admin.sellers.index', compact('sellers'));
     }
 
@@ -27,6 +30,7 @@ class SellerController extends Controller
         ]);
 
         Seller::create($request->all());
+
         return redirect()->route('admin.sellers.index')->with('success', 'Seller created successfully!');
     }
 
@@ -39,16 +43,18 @@ class SellerController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|email|unique:sellers,email,' . $seller->id,
+            'email' => 'required|email|unique:sellers,email,'.$seller->id,
         ]);
 
         $seller->update($request->all());
+
         return redirect()->route('admin.sellers.index')->with('success', 'Seller updated successfully!');
     }
 
     public function destroy(Seller $seller)
     {
         $seller->delete();
+
         return redirect()->route('admin.sellers.index')->with('success', 'Seller deleted successfully!');
     }
 }

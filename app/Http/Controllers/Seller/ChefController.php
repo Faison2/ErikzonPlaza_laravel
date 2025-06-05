@@ -15,25 +15,25 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 
-use function Ramsey\Uuid\v1;
-
 class ChefController extends Controller
 {
     use FileUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
-    public function index(ChefDataTable $dataTable) : View|JsonResponse
+    public function index(ChefDataTable $dataTable): View|JsonResponse
     {
         $keys = ['chef_top_title', 'chef_main_title', 'chef_sub_title'];
-        $titles = SectionTitle::whereIn('key', $keys)->pluck('value','key');
+        $titles = SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
+
         return $dataTable->render('admin.chef.index', compact('titles'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         return view('admin.chef.create');
     }
@@ -41,7 +41,7 @@ class ChefController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ChefCreateRequest $request) : RedirectResponse
+    public function store(ChefCreateRequest $request): RedirectResponse
     {
         $imagePath = $this->uploadImage($request, 'image');
 
@@ -62,25 +62,25 @@ class ChefController extends Controller
         return to_route('admin.chefs.index');
     }
 
-
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) : View
+    public function edit(string $id): View
     {
         $chef = Chef::findOrFail($id);
+
         return view('admin.chef.edit', compact('chef'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ChefUpdateRequest $request, string $id) : RedirectResponse
+    public function update(ChefUpdateRequest $request, string $id): RedirectResponse
     {
         $imagePath = $this->uploadImage($request, 'image', $request->old_image);
 
         $chef = Chef::findOrFail($id);
-        $chef->image = !empty($imagePath) ? $imagePath : $request->old_image;
+        $chef->image = ! empty($imagePath) ? $imagePath : $request->old_image;
         $chef->name = $request->name;
         $chef->title = $request->title;
         $chef->fb = $request->fb;
@@ -99,10 +99,10 @@ class ChefController extends Controller
     public function updateTitle(Request $request)
     {
         $validatedData = $request->validate([
-                    'chef_top_title' => ['max:100'],
-                    'chef_main_title' => ['max:200'],
-                    'chef_sub_title' => ['max:500']
-                ]);
+            'chef_top_title' => ['max:100'],
+            'chef_main_title' => ['max:200'],
+            'chef_sub_title' => ['max:500'],
+        ]);
 
         foreach ($validatedData as $key => $value) {
             SectionTitle::updateOrCreate(
@@ -119,12 +119,13 @@ class ChefController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) : Response
+    public function destroy(string $id): Response
     {
         try {
             $chef = Chef::findOrFail($id);
             $this->removeImage($chef->image);
             $chef->delete();
+
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);

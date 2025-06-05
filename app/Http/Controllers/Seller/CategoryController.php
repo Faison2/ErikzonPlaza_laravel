@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\CategoryCreateRequest;
 use App\Http\Requests\Admin\CategoryUpdateRequest;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Str;
 
@@ -25,7 +24,7 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         return view('admin.product.category.create');
     }
@@ -33,7 +32,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryCreateRequest $request) : RedirectResponse
+    public function store(CategoryCreateRequest $request): RedirectResponse
     {
         $category = new Category();
         $category->name = $request->name;
@@ -48,13 +47,13 @@ class CategoryController extends Controller
 
     }
 
-
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) : View
+    public function edit(string $id): View
     {
         $category = Category::findOrFail($id);
+
         return view('admin.product.category.edit', compact('category'));
     }
 
@@ -80,10 +79,11 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        try{
+        try {
             Category::findOrFail($id)->delete();
+
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }
     }

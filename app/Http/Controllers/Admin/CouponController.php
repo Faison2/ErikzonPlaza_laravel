@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CouponCreateRequest;
 use App\Models\Coupon;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class CouponController extends Controller
@@ -23,7 +22,7 @@ class CouponController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         return view('admin.coupon.create');
     }
@@ -31,7 +30,7 @@ class CouponController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CouponCreateRequest $request) : RedirectResponse
+    public function store(CouponCreateRequest $request): RedirectResponse
     {
         $coupon = new Coupon();
         $coupon->name = $request->name;
@@ -52,9 +51,10 @@ class CouponController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) : View
+    public function edit(string $id): View
     {
         $coupon = Coupon::findOrFail($id);
+
         return view('admin.coupon.edit', compact('coupon'));
     }
 
@@ -88,7 +88,7 @@ class CouponController extends Controller
             Coupon::findOrFail($id)->delete();
 
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }
     }

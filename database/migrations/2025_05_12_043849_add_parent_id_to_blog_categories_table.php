@@ -10,21 +10,21 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-{
-    Schema::table('blog_categories', function (Blueprint $table) {
-        $table->unsignedBigInteger('parent_id')->nullable()->after('id');
-        $table->foreign('parent_id')->references('id')->on('blog_categories')->onDelete('cascade');
-    });
-}
+    {
+        Schema::table('blog_categories', function (Blueprint $table) {
+            $table->unsignedBigInteger('parent_id')->nullable()->after('id');
+            $table->foreign('parent_id')->references('id')->on('blog_categories')->onDelete('cascade');
+        });
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
-{
-    Schema::table('blog_categories', function (Blueprint $table) {
-        $table->dropForeign(['parent_id']);
-        $table->dropColumn('parent_id');
-    });
-}
+    {
+        Schema::table('blog_categories', function (Blueprint $table) {
+            $table->dropForeign(['parent_id']);
+            $table->dropColumn('parent_id');
+        });
+    }
 };

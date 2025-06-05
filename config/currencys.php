@@ -115,5 +115,5 @@ return [
         'Viet Nam Dong' => 'VND',
         'Yemen Rial' => 'YER',
         'Zimbabwe Dollar' => 'ZWD',
-    ]
+    ],
 ];

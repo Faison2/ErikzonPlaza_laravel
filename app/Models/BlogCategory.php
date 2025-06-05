@@ -10,7 +10,8 @@ class BlogCategory extends Model
 {
     use HasFactory;
 
-    function blogs() : HasMany {
+    public function blogs(): HasMany
+    {
         return $this->hasMany(Blog::class, 'category_id', 'id');
     }
 }

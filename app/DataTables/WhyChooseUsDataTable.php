@@ -2,15 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\WhyChooseU;
 use App\Models\WhyChooseUs;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class WhyChooseUsDataTable extends DataTable
@@ -18,19 +15,19 @@ class WhyChooseUsDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', function ($query) {
-                $edit = "<a href='" . route('admin.why-choose-us.edit', $query->id) . "' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
-                $delete = "<a href='" . route('admin.why-choose-us.destroy', $query->id) . "' class='btn btn-danger delete-item ml-2'><i class='fas fa-trash'></i></a>";
+                $edit = "<a href='".route('admin.why-choose-us.edit', $query->id)."' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
+                $delete = "<a href='".route('admin.why-choose-us.destroy', $query->id)."' class='btn btn-danger delete-item ml-2'><i class='fas fa-trash'></i></a>";
 
-                return $edit . $delete;
+                return $edit.$delete;
             })
             ->addColumn('icon', function ($query) {
-                return "<i style='font-size:50px' class='" . $query->icon . "'></i>";
+                return "<i style='font-size:50px' class='".$query->icon."'></i>";
             })
             ->addColumn('status', function ($query) {
                 if ($query->status === 1) {
@@ -69,7 +66,7 @@ class WhyChooseUsDataTable extends DataTable
                 Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload')
+                Button::make('reload'),
             ]);
     }
 
@@ -97,6 +94,6 @@ class WhyChooseUsDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'WhyChooseUs_' . date('YmdHis');
+        return 'WhyChooseUs_'.date('YmdHis');
     }
 }

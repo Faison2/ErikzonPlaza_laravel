@@ -24,7 +24,7 @@ class CouponFactory extends Factory
             'expire_date' => fake()->date(),
             'discount_type' => 'percent',
             'discount' => '10',
-            'status' => fake()->boolean()
+            'status' => fake()->boolean(),
         ];
     }
 }

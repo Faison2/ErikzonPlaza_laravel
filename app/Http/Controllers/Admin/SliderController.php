@@ -10,11 +10,11 @@ use App\Models\Slider;
 use App\Traits\FileUploadTrait;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
     use FileUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
@@ -68,6 +68,7 @@ class SliderController extends Controller
     public function edit(string $id): View
     {
         $slider = Slider::findOrFail($id);
+
         return view('admin.slider.edit', compact('slider'));
     }
 
@@ -81,7 +82,7 @@ class SliderController extends Controller
         /** Handle Image Upload */
         $imagePath = $this->uploadImage($request, 'image', $slider->image);
 
-        $slider->image = !empty($imagePath) ? $imagePath : $slider->image;
+        $slider->image = ! empty($imagePath) ? $imagePath : $slider->image;
         $slider->offer = $request->offer;
         $slider->title = $request->title;
         $slider->sub_title = $request->sub_title;
@@ -104,6 +105,7 @@ class SliderController extends Controller
             $slider = Slider::findOrFail($id);
             $this->removeImage($slider->image);
             $slider->delete();
+
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);

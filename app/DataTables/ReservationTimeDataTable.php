@@ -8,8 +8,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class ReservationTimeDataTable extends DataTable
@@ -17,22 +15,22 @@ class ReservationTimeDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
 
-            ->addColumn('action', function($query){
+            ->addColumn('action', function ($query) {
                 $edit = "<a href='".route('admin.reservation-time.edit', $query->id)."' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
                 $delete = "<a href='".route('admin.reservation-time.destroy', $query->id)."' class='btn btn-danger delete-item ml-2'><i class='fas fa-trash'></i></a>";
 
                 return $edit.$delete;
             })
-            ->addColumn('status', function($query){
-                if($query->status === 1){
+            ->addColumn('status', function ($query) {
+                if ($query->status === 1) {
                     return '<span class="badge badge-primary">Active</span>';
-                }else {
+                } else {
                     return '<span class="badge badge-danger">InActive</span>';
                 }
             })
@@ -54,20 +52,20 @@ class ReservationTimeDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('reservationtime-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
+            ->setTableId('reservationtime-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->orderBy(0)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload'),
+            ]);
     }
 
     /**
@@ -82,10 +80,10 @@ class ReservationTimeDataTable extends DataTable
             Column::make('end_time'),
             Column::make('status'),
             Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->width(100)
-            ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(100)
+                ->addClass('text-center'),
         ];
     }
 
@@ -94,6 +92,6 @@ class ReservationTimeDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'ReservationTime_' . date('YmdHis');
+        return 'ReservationTime_'.date('YmdHis');
     }
 }

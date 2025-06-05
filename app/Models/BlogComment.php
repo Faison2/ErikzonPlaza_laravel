@@ -10,11 +10,13 @@ class BlogComment extends Model
 {
     use HasFactory;
 
-    function blog() : BelongsTo {
+    public function blog(): BelongsTo
+    {
         return $this->belongsTo(Blog::class, 'blog_id', 'id');
     }
 
-    function user() : BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

@@ -26,7 +26,7 @@ class BannerSliderCreateRequest extends FormRequest
             'title' => ['required', 'max:255'],
             'sub_title' => ['required', 'max:255'],
             'url' => ['required'],
-            'status' => ['required', 'boolean']
+            'status' => ['required', 'boolean'],
         ];
     }
 }

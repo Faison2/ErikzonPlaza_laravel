@@ -10,22 +10,23 @@ use Illuminate\View\View;
 
 class TramsAndConditionController extends Controller
 {
-    function index(): View
+    public function index(): View
     {
         $tramsAndCondition = TramsAndCondition::first();
+
         return view('admin.trams-and-condition.index', compact('tramsAndCondition'));
     }
 
-    function update(Request $request): RedirectResponse
+    public function update(Request $request): RedirectResponse
     {
         $request->validate([
-            'content' => ['required']
+            'content' => ['required'],
         ]);
 
         TramsAndCondition::updateOrCreate(
             ['id' => 1],
             [
-                'content' => $request->content
+                'content' => $request->content,
             ]
         );
         toastr()->success('Updated Successfully');

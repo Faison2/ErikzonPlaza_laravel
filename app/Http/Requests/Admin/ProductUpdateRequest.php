@@ -34,7 +34,7 @@ class ProductUpdateRequest extends FormRequest
             'seo_title' => ['nullable', 'max:255'],
             'seo_description' => ['nullable', 'max:255'],
             'show_at_home' => ['boolean'],
-            'status' => ['required','boolean']
+            'status' => ['required', 'boolean'],
         ];
     }
 }

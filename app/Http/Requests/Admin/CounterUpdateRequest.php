@@ -40,7 +40,6 @@ class CounterUpdateRequest extends FormRequest
             'counter_count_four' => ['required', 'numeric'],
             'counter_name_four' => ['required', 'max:255'],
 
-
         ];
     }
 }

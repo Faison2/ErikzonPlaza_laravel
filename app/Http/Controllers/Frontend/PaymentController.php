@@ -11,17 +11,16 @@ use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Razorpay\Api\Api as RazorpayApi;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
-use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
-use Razorpay\Api\Api as RazorpayApi ;
-
+use Stripe\Stripe;
 
 class PaymentController extends Controller
 {
-    function index(): View
+    public function index(): View
     {
-        if (!session()->has('delivery_fee') || !session()->has('address')) {
+        if (! session()->has('delivery_fee') || ! session()->has('address')) {
             throw ValidationException::withMessages(['Something went wrong']);
         }
 
@@ -29,6 +28,7 @@ class PaymentController extends Controller
         $delivery = session()->get('delivery_fee') ?? 0;
         $discount = session()->get('coupon')['discount'] ?? 0;
         $grandTotal = grandCartTotal($delivery);
+
         return view('frontend.pages.payment', compact(
             'subtotal',
             'delivery',
@@ -37,18 +37,20 @@ class PaymentController extends Controller
         ));
     }
 
-    function paymentSuccess() : View {
+    public function paymentSuccess(): View
+    {
         return view('frontend.pages.payment-success');
     }
 
-    function paymentCancel() : View {
+    public function paymentCancel(): View
+    {
         return view('frontend.pages.payment-cancel');
     }
 
-    function makePayment(Request $request, OrderService $orderService)
+    public function makePayment(Request $request, OrderService $orderService)
     {
         $request->validate([
-            'payment_gateway' => ['required', 'string', 'in:paypal,stripe,razorpay']
+            'payment_gateway' => ['required', 'string', 'in:paypal,stripe,razorpay'],
         ]);
 
         /** Create Order */
@@ -73,34 +75,33 @@ class PaymentController extends Controller
         }
     }
 
-
     /** Paypal Payment  */
-    function setPaypalConfig(): array
+    public function setPaypalConfig(): array
     {
         $config = [
-            'mode'    => config('gatewaySettings.paypal_account_mode'), // Can only be 'sandbox' Or 'live'. If empty or invalid, 'live' will be used.
+            'mode' => config('gatewaySettings.paypal_account_mode'), // Can only be 'sandbox' Or 'live'. If empty or invalid, 'live' will be used.
             'sandbox' => [
-                'client_id'         => config('gatewaySettings.paypal_api_key'),
-                'client_secret'     => config('gatewaySettings.paypal_secret_key'),
-                'app_id'            => 'APP-80W284485P519543T',
+                'client_id' => config('gatewaySettings.paypal_api_key'),
+                'client_secret' => config('gatewaySettings.paypal_secret_key'),
+                'app_id' => 'APP-80W284485P519543T',
             ],
             'live' => [
-                'client_id'         => config('gatewaySettings.paypal_api_key'),
-                'client_secret'     => config('gatewaySettings.paypal_secret_key'),
-                'app_id'            => config('gatewaySettings.paypal_app_id'),
+                'client_id' => config('gatewaySettings.paypal_api_key'),
+                'client_secret' => config('gatewaySettings.paypal_secret_key'),
+                'app_id' => config('gatewaySettings.paypal_app_id'),
             ],
 
             'payment_action' => 'Sale', // Can only be 'Sale', 'Authorization' or 'Order'
-            'currency'       => config('gatewaySettings.paypal_currency'),
-            'notify_url'     => env('PAYPAL_NOTIFY_URL', ''), // Change this accordingly for your application.
-            'locale'         => 'en_US', // force gateway language  i.e. it_IT, es_ES, en_US ... (for express checkout only)
-            'validate_ssl'   => true, // Validate SSL when creating api client.
+            'currency' => config('gatewaySettings.paypal_currency'),
+            'notify_url' => env('PAYPAL_NOTIFY_URL', ''), // Change this accordingly for your application.
+            'locale' => 'en_US', // force gateway language  i.e. it_IT, es_ES, en_US ... (for express checkout only)
+            'validate_ssl' => true, // Validate SSL when creating api client.
         ];
 
         return $config;
     }
 
-    function payWithPaypal()
+    public function payWithPaypal()
     {
         $config = $this->setPaypalConfig();
         $provider = new PayPalClient($config);
@@ -111,33 +112,33 @@ class PaymentController extends Controller
         $payableAmount = round($grandTotal * config('gatewaySettings.paypal_rate'));
 
         $response = $provider->createOrder([
-            'intent' => "CAPTURE",
+            'intent' => 'CAPTURE',
             'application_context' => [
                 'return_url' => route('paypal.success'),
-                'cancel_url' => route('paypal.cancel')
+                'cancel_url' => route('paypal.cancel'),
             ],
             'purchase_units' => [
                 [
                     'amount' => [
                         'currency_code' => config('gatewaySettings.paypal_currency'),
-                        'value' => $payableAmount
-                    ]
-                ]
-            ]
+                        'value' => $payableAmount,
+                    ],
+                ],
+            ],
         ]);
 
-        if(isset($response['id']) && $response['id'] != NULL){
-            foreach($response['links'] as $link){
-                if($link['rel'] === 'approve'){
+        if (isset($response['id']) && $response['id'] != null) {
+            foreach ($response['links'] as $link) {
+                if ($link['rel'] === 'approve') {
                     return redirect()->away($link['href']);
                 }
             }
-        }else {
+        } else {
             return redirect()->route('payment.cancel')->withErrors(['error' => $response['error']['message']]);
         }
     }
 
-    function paypalSuccess(Request $request, OrderService $orderService)
+    public function paypalSuccess(Request $request, OrderService $orderService)
     {
         $config = $this->setPaypalConfig();
         $provider = new PayPalClient($config);
@@ -145,8 +146,7 @@ class PaymentController extends Controller
 
         $response = $provider->capturePaymentOrder($request->token);
 
-
-        if(isset($response['status']) && $response['status'] === 'COMPLETED'){
+        if (isset($response['status']) && $response['status'] === 'COMPLETED') {
 
             $orderId = session()->get('order_id');
 
@@ -154,7 +154,7 @@ class PaymentController extends Controller
             $paymentInfo = [
                 'transaction_id' => $capture['id'],
                 'currency' => $capture['amount']['currency_code'],
-                'status' => 'completed'
+                'status' => 'completed',
             ];
 
             OrderPaymentUpdateEvent::dispatch($orderId, $paymentInfo, 'PayPal');
@@ -165,21 +165,23 @@ class PaymentController extends Controller
             $orderService->clearSession();
 
             return redirect()->route('payment.success');
-        }else {
+        } else {
             $this->transactionFailUpdateStatus('PayPal');
+
             return redirect()->route('payment.cancel')->withErrors(['error' => $response['error']['message']]);
         }
     }
 
-    function paypalCancel()
+    public function paypalCancel()
     {
         $this->transactionFailUpdateStatus('PayPal');
+
         return redirect()->route('payment.cancel');
     }
 
     /** Stripe Payment */
-
-    function payWithStripe() {
+    public function payWithStripe()
+    {
         Stripe::setApiKey(config('gatewaySettings.stripe_secret_key'));
 
         /** calculate payable amount */
@@ -192,115 +194,120 @@ class PaymentController extends Controller
                     'price_data' => [
                         'currency' => config('gatewaySettings.stripe_currency'),
                         'product_data' => [
-                            'name' => 'Product'
+                            'name' => 'Product',
                         ],
-                        'unit_amount' => $payableAmount
+                        'unit_amount' => $payableAmount,
                     ],
-                    'quantity' => 1
-                ]
+                    'quantity' => 1,
+                ],
             ],
             'mode' => 'payment',
-            'success_url' => route('stripe.success') . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('stripe.cancel')
+            'success_url' => route('stripe.success').'?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('stripe.cancel'),
         ]);
 
         return redirect()->away($response->url);
     }
 
-    function stripeSuccess(Request $request, OrderService $orderService) {
+    public function stripeSuccess(Request $request, OrderService $orderService)
+    {
         $sessionId = $request->session_id;
         Stripe::setApiKey(config('gatewaySettings.stripe_secret_key'));
 
         $response = StripeSession::retrieve($sessionId);
 
-        if($response->payment_status === 'paid') {
+        if ($response->payment_status === 'paid') {
 
             $orderId = session()->get('order_id');
             $paymentInfo = [
                 'transaction_id' => $response->payment_intent,
                 'currency' => $response->currency,
-                'status' => 'completed'
+                'status' => 'completed',
             ];
 
             OrderPaymentUpdateEvent::dispatch($orderId, $paymentInfo, 'Stripe');
             OrderPlacedNotificationEvent::dispatch($orderId);
             RTOrderPlacedNotificationEvent::dispatch(Order::find($orderId));
 
-
             /** Clear session data */
             $orderService->clearSession();
 
             return redirect()->route('payment.success');
-        }else {
+        } else {
             $this->transactionFailUpdateStatus('Stripe');
+
             return redirect()->route('payment.cancel');
         }
     }
 
-    function stripeCancel() {
+    public function stripeCancel()
+    {
         $this->transactionFailUpdateStatus('Stripe');
+
         return redirect()->route('payment.cancel');
     }
 
-    function razorpayRedirect() {
+    public function razorpayRedirect()
+    {
         return view('frontend.pages.razorpay-redirect');
     }
 
-    function payWithRazorpay(Request $request, OrderService $orderService) {
+    public function payWithRazorpay(Request $request, OrderService $orderService)
+    {
         $api = new RazorpayApi(
             config('gatewaySettings.razorpay_api_key'),
             config('gatewaySettings.razorpay_secret_key'),
         );
 
-        if($request->has('razorpay_payment_id') && $request->filled('razorpay_payment_id')){
+        if ($request->has('razorpay_payment_id') && $request->filled('razorpay_payment_id')) {
             $grandTotal = session()->get('grand_total');
             $payableAmount = ($grandTotal * config('gatewaySettings.razorpay_rate')) * 100;
 
-            try{
+            try {
                 $response = $api->payment
                     ->fetch($request->razorpay_payment_id)
                     ->capture(['amount' => $payableAmount]);
-            }catch(\Exception $e) {
+            } catch (\Exception $e) {
                 logger($e);
                 $this->transactionFailUpdateStatus('Razorpay');
+
                 return redirect()->route('payment.cancel')->withErrors($e->getMessage());
             }
 
-            if($response['status'] === 'captured'){
+            if ($response['status'] === 'captured') {
 
                 $orderId = session()->get('order_id');
                 $paymentInfo = [
                     'transaction_id' => $response->id,
                     'currency' => config('settings.site_default_currency'),
-                    'status' => 'completed'
+                    'status' => 'completed',
                 ];
 
                 OrderPaymentUpdateEvent::dispatch($orderId, $paymentInfo, 'Razorpay');
                 OrderPlacedNotificationEvent::dispatch($orderId);
                 RTOrderPlacedNotificationEvent::dispatch(Order::find($orderId));
 
-
                 /** Clear session data */
                 $orderService->clearSession();
 
                 return redirect()->route('payment.success');
-            }else {
+            } else {
                 $this->transactionFailUpdateStatus('Razorpay');
+
                 return redirect()->route('payment.cancel')->withErrors($e->getMessage());
             }
         }
     }
 
-
-    function transactionFailUpdateStatus($gatewayName) : void {
+    public function transactionFailUpdateStatus($gatewayName): void
+    {
         $orderId = session()->get('order_id');
         $paymentInfo = [
             'transaction_id' => '',
             'currency' => '',
-            'status' => 'Failed'
+            'status' => 'Failed',
         ];
 
         OrderPaymentUpdateEvent::dispatch($orderId, $paymentInfo, $gatewayName);
     }
-
 }

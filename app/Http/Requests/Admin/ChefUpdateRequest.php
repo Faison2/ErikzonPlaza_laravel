@@ -25,7 +25,7 @@ class ChefUpdateRequest extends FormRequest
             'image' => ['nullable', 'image'],
             'name' => ['required', 'max:255'],
             'title' => ['required', 'max:255'],
-            'fb' => ['nullable','max:255', 'url'],
+            'fb' => ['nullable', 'max:255', 'url'],
             'in' => ['nullable', 'max:255', 'url'],
             'x' => ['nullable', 'max:255', 'url'],
             'web' => ['nullable', 'max:255', 'url'],

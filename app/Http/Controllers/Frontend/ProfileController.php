@@ -7,7 +7,6 @@ use App\Http\Requests\Frontend\ProfilePasswordUpdateRequest;
 use App\Http\Requests\Frontend\ProfileUpdateRequest;
 use App\Traits\FileUploadTrait;
 use Auth;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -15,7 +14,8 @@ class ProfileController extends Controller
 {
     use FileUploadTrait;
 
-    function updateProfile(ProfileUpdateRequest $request) : RedirectResponse {
+    public function updateProfile(ProfileUpdateRequest $request): RedirectResponse
+    {
         $user = Auth::user();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -26,7 +26,8 @@ class ProfileController extends Controller
         return redirect()->back();
     }
 
-    function updatePassword(ProfilePasswordUpdateRequest $request) : RedirectResponse {
+    public function updatePassword(ProfilePasswordUpdateRequest $request): RedirectResponse
+    {
         $user = Auth::user();
         $user->password = bcrypt($request->password);
         $user->save();
@@ -35,7 +36,8 @@ class ProfileController extends Controller
         return redirect()->back();
     }
 
-    function updateAvatar(Request $request) {
+    public function updateAvatar(Request $request)
+    {
         /** handle image file */
         $imagePath = $this->uploadImage($request, 'avatar');
 

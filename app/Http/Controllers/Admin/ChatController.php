@@ -5,14 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Events\ChatEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class ChatController extends Controller
 {
-    function index(): View
+    public function index(): View
     {
         $userId = auth()->user()->id;
 
@@ -27,7 +26,8 @@ class ChatController extends Controller
         return view('admin.chat.index', compact('senders'));
     }
 
-    function getConversation(string $senderId) : Response {
+    public function getConversation(string $senderId): Response
+    {
         $receiverId = auth()->user()->id;
 
         Chat::where('sender_id', $senderId)->where('receiver_id', $receiverId)->where('seen', 0)->update(['seen' => 1]);
@@ -37,13 +37,15 @@ class ChatController extends Controller
             ->with(['sender'])
             ->orderBy('created_at', 'asc')
             ->get();
+
         return response($messages);
     }
 
-    function sendMessage(Request $request) {
+    public function sendMessage(Request $request)
+    {
         $request->validate([
             'message' => ['required', 'max:1000'],
-            'receiver_id' => ['required', 'integer']
+            'receiver_id' => ['required', 'integer'],
         ]);
 
         $chat = new Chat();

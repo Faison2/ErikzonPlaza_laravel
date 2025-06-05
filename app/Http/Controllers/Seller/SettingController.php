@@ -15,12 +15,12 @@ class SettingController extends Controller
 {
     use FileUploadTrait;
 
-    function index(): View
+    public function index(): View
     {
         return view('admin.setting.index');
     }
 
-    function UpdateGeneralSetting(Request $request)
+    public function UpdateGeneralSetting(Request $request)
     {
         $validatedData = $request->validate([
             'site_name' => ['required', 'max:255'],
@@ -46,7 +46,7 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
-    function UpdatePusherSetting(Request $request): RedirectResponse
+    public function UpdatePusherSetting(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
             'pusher_app_id' => ['required'],
@@ -70,7 +70,7 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
-    function UpdateMailSetting(Request $request)
+    public function UpdateMailSetting(Request $request)
     {
         $validatedData = $request->validate([
             'mail_driver' => ['required'],
@@ -99,7 +99,7 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
-    function UpdateLogoSetting(Request $request): RedirectResponse
+    public function UpdateLogoSetting(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
             'logo' => ['nullable', 'image', 'max:1000'],
@@ -111,8 +111,8 @@ class SettingController extends Controller
         foreach ($validatedData as $key => $value) {
 
             $imagePatch = $this->uploadImage($request, $key);
-            if (!empty($imagePatch)) {
-                $oldPath = config('settings.' . $key);
+            if (! empty($imagePatch)) {
+                $oldPath = config('settings.'.$key);
                 $this->removeImage($oldPath);
 
                 Setting::updateOrCreate(
@@ -131,10 +131,10 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
-    function UpdateAppearanceSetting(Request $request): RedirectResponse
+    public function UpdateAppearanceSetting(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            'site_color' => ['required']
+            'site_color' => ['required'],
         ]);
 
         foreach ($validatedData as $key => $value) {
@@ -153,11 +153,12 @@ class SettingController extends Controller
         return redirect()->back();
     }
 
-    function UpdateSeoSetting(Request $request) : RedirectResponse {
+    public function UpdateSeoSetting(Request $request): RedirectResponse
+    {
         $validatedData = $request->validate([
             'seo_title' => ['required', 'max:255'],
             'seo_description' => ['nullable', 'max:600'],
-            'seo_keywords' => ['nullable']
+            'seo_keywords' => ['nullable'],
         ]);
 
         foreach ($validatedData as $key => $value) {

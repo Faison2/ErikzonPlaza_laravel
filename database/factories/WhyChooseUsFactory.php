@@ -20,7 +20,7 @@ class WhyChooseUsFactory extends Factory
             'icon' => 'fas fa-shapes',
             'title' => fake()->sentence(),
             'short_description' => fake()->sentence(),
-            'status' => fake()->boolean()
+            'status' => fake()->boolean(),
         ];
     }
 }

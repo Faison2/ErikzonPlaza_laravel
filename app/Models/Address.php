@@ -10,7 +10,8 @@ class Address extends Model
 {
     use HasFactory;
 
-    function deliveryArea() : BelongsTo {
+    public function deliveryArea(): BelongsTo
+    {
         return $this->belongsTo(DeliveryArea::class);
     }
 }

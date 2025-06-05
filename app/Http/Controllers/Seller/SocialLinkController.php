@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\SocialLinkStoreRequest;
 use App\Models\SocialLink;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class SocialLinkController extends Controller
@@ -16,7 +15,7 @@ class SocialLinkController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(SocialLinkDataTable $dataTable) : View|JsonResponse
+    public function index(SocialLinkDataTable $dataTable): View|JsonResponse
     {
         return $dataTable->render('admin.social-link.index');
     }
@@ -24,7 +23,7 @@ class SocialLinkController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         return view('admin.social-link.create');
     }
@@ -32,7 +31,7 @@ class SocialLinkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(SocialLinkStoreRequest $request) : RedirectResponse
+    public function store(SocialLinkStoreRequest $request): RedirectResponse
     {
         $link = new SocialLink();
         $link->icon = $request->icon;
@@ -53,6 +52,7 @@ class SocialLinkController extends Controller
     public function edit(string $id)
     {
         $link = SocialLink::findOrFail($id);
+
         return view('admin.social-link.edit', compact('link'));
     }
 
@@ -81,6 +81,7 @@ class SocialLinkController extends Controller
         try {
             $link = SocialLink::findOrFail($id);
             $link->delete();
+
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);

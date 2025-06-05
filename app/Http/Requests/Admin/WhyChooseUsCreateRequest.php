@@ -25,7 +25,7 @@ class WhyChooseUsCreateRequest extends FormRequest
             'icon' => ['required', 'max:50'],
             'title' => ['required', 'max:255'],
             'short_description' => ['required', 'max:500'],
-            'status' => ['required', 'boolean']
+            'status' => ['required', 'boolean'],
         ];
     }
 }

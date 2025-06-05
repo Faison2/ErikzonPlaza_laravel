@@ -14,24 +14,26 @@ use Illuminate\View\View;
 class ProductGalleryController extends Controller
 {
     use FileUploadTrait;
+
     /**
      * Display a listing of the resource.
      */
-    public function index(string $productId) : View
+    public function index(string $productId): View
     {
         $images = ProductGallery::where('product_id', $productId)->get();
         $product = Product::findOrFail($productId);
+
         return view('admin.product.gallery.index', compact('product', 'images'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) : RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'image' => ['required', 'image', 'max:3000'],
-            'product_id' => ['required', 'integer']
+            'product_id' => ['required', 'integer'],
         ]);
 
         $imagePath = $this->uploadImage($request, 'image');
@@ -50,15 +52,15 @@ class ProductGalleryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) : Response
+    public function destroy(string $id): Response
     {
-        try{
+        try {
             $image = ProductGallery::findOrFail($id);
             $this->removeImage($image->image);
             $image->delete();
 
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }
     }

@@ -10,11 +10,13 @@ class ProductRating extends Model
 {
     use HasFactory;
 
-    function user() : BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    function product() : BelongsTo {
+    public function product(): BelongsTo
+    {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }

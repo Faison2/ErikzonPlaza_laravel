@@ -8,8 +8,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class BlogCommentDataTable extends DataTable
@@ -17,15 +15,15 @@ class BlogCommentDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function($query){
-                if($query->status === 1){
+            ->addColumn('action', function ($query) {
+                if ($query->status === 1) {
                     $edit = "<a href='".route('admin.blogs.comments.update', $query->id)."' class='btn btn-success'><i class='fas fa-eye'></i></a>";
-                }else {
+                } else {
                     $edit = "<a href='".route('admin.blogs.comments.update', $query->id)."' class='btn btn-warning'><i class='fas fa-eye-slash'></i></a>";
                 }
 
@@ -33,19 +31,19 @@ class BlogCommentDataTable extends DataTable
 
                 return $edit.$delete;
             })
-            ->addColumn('blog', function($query){
+            ->addColumn('blog', function ($query) {
                 return $query->blog->title;
             })
-            ->addColumn('user_name', function($query){
+            ->addColumn('user_name', function ($query) {
                 return $query->user->name;
             })
-            ->addColumn('date', function($query){
+            ->addColumn('date', function ($query) {
                 return date('d-m-Y | H:i', strtotime($query->created_at));
             })
-            ->addColumn('status', function($query){
-                if($query->status === 1){
+            ->addColumn('status', function ($query) {
+                if ($query->status === 1) {
                     return '<span class="badge badge-primary">Approved</span>';
-                }else {
+                } else {
                     return '<span class="badge badge-warning">Pending</span>';
                 }
             })
@@ -67,20 +65,20 @@ class BlogCommentDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('blogcomment-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
+            ->setTableId('blogcomment-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->orderBy(0)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload'),
+            ]);
     }
 
     /**
@@ -97,10 +95,10 @@ class BlogCommentDataTable extends DataTable
             Column::make('date'),
             Column::make('status'),
             Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->width(100)
-            ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(100)
+                ->addClass('text-center'),
         ];
     }
 
@@ -109,6 +107,6 @@ class BlogCommentDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'BlogComment_' . date('YmdHis');
+        return 'BlogComment_'.date('YmdHis');
     }
 }

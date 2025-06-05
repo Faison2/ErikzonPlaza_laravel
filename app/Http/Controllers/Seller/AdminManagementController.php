@@ -15,7 +15,7 @@ class AdminManagementController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(AdminManagementDataTable $dataTable) : View|JsonResponse
+    public function index(AdminManagementDataTable $dataTable): View|JsonResponse
     {
         return $dataTable->render('admin.admin-management.index');
     }
@@ -23,7 +23,7 @@ class AdminManagementController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         return view('admin.admin-management.create');
     }
@@ -37,7 +37,7 @@ class AdminManagementController extends Controller
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
             'role' => ['required', 'in:admin'],
-            'password' => ['required', 'confirmed', 'min:5']
+            'password' => ['required', 'confirmed', 'min:5'],
         ]);
 
         $user = new User();
@@ -55,9 +55,10 @@ class AdminManagementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) : View
+    public function edit(string $id): View
     {
         $admin = User::findOrFail($id);
+
         return view('admin.admin-management.edit', compact('admin'));
     }
 
@@ -68,7 +69,7 @@ class AdminManagementController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if($id == 1){
+        if ($id == 1) {
             throw ValidationException::withMessages(['you can not update super admin']);
         }
 
@@ -78,9 +79,9 @@ class AdminManagementController extends Controller
             'role' => ['required', 'in:admin'],
         ]);
 
-        if($request->has('password') && $request->filled('password')){
+        if ($request->has('password') && $request->filled('password')) {
             $request->validate([
-                'password' => ['confirmed', 'min:5']
+                'password' => ['confirmed', 'min:5'],
             ]);
             $user->password = bcrypt($request->password);
         }
@@ -100,12 +101,13 @@ class AdminManagementController extends Controller
      */
     public function destroy(string $id)
     {
-        if($id == 1){
+        if ($id == 1) {
             throw ValidationException::withMessages(['you can not delete super admin']);
         }
         try {
             $admin = User::findOrFail($id);
             $admin->delete();
+
             return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);

@@ -1,8 +1,6 @@
 <?php
 
-use App\DataTables\SocialLinkDataTable;
 use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminManagementController;
 use App\Http\Controllers\Admin\AppDownloadSectionController;
@@ -38,16 +36,10 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\TramsAndConditionController;
-use App\Http\Controllers\Admin\TramsAndCondtionController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
-use App\Models\AppDownloadSection;
-use App\Models\BannerSlider;
-use App\Models\PrivacyPolicy;
-use App\Models\ReservationTime;
-use App\Models\TramsAndCondtion;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
@@ -85,7 +77,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::post('product-reviews', [ProductReviewController::class, 'updateStatus'])->name('product-reviews.update');
     Route::delete('product-reviews/{id}', [ProductReviewController::class, 'destroy'])->name('product-reviews.destroy');
 
-
     /** Coupon Routes */
     Route::resource('coupon', CouponController::class);
 
@@ -106,13 +97,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::put('orders/status-update/{id}', [OrderController::class, 'orderStatusUpdate'])->name('orders.status-update');
 
     /** Order Notification Routes */
-    Route::get('clear-notification',[AdminDashboardController::class, 'clearNotification'])->name('clear-notification');
+    Route::get('clear-notification', [AdminDashboardController::class, 'clearNotification'])->name('clear-notification');
 
     /** chat Routes */
-    Route::get('chat',[ChatController::class, 'index'])->name('chat.index');
-    Route::get('chat/get-conversation/{senderId}',[ChatController::class, 'getConversation'])->name('chat.get-conversation');
+    Route::get('chat', [ChatController::class, 'index'])->name('chat.index');
+    Route::get('chat/get-conversation/{senderId}', [ChatController::class, 'getConversation'])->name('chat.get-conversation');
     Route::post('chat/send-message', [ChatController::class, 'sendMessage'])->name('chat.send-message');
-
 
     /** Daily Offer Routes */
     Route::get('daily-offer/search-product', [DailyOfferController::class, 'productSearch'])->name('daily-offer.search-product');
@@ -189,7 +179,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     /** Admin management Routes */
     Route::resource('admin-management', AdminManagementController::class);
 
-
     /** Payment Gateway Setting Routes */
     Route::get('/payment-gateway-setting', [PaymentGatewaySettingController::class, 'index'])->name('payment-setting.index');
     Route::put('/paypal-setting', [PaymentGatewaySettingController::class, 'paypalSettingUpdate'])->name('paypal-setting.update');
@@ -208,9 +197,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     /** Clear Database Routes */
     Route::get('/clear-database', [ClearDatabaseController::class, 'index'])->name('clear-database.index');
     Route::post('/clear-database', [ClearDatabaseController::class, 'clearDB'])->name('clear-database.destroy');
-
-
-
-
 
 });

@@ -8,8 +8,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class SocialLinkDataTable extends DataTable
@@ -17,24 +15,24 @@ class SocialLinkDataTable extends DataTable
     /**
      * Build the DataTable class.
      *
-     * @param QueryBuilder $query Results from query() method.
+     * @param  QueryBuilder  $query  Results from query() method.
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function($query){
+            ->addColumn('action', function ($query) {
                 $edit = "<a href='".route('admin.social-link.edit', $query->id)."' class='btn btn-primary'><i class='fas fa-edit'></i></a>";
                 $delete = "<a href='".route('admin.social-link.destroy', $query->id)."' class='btn btn-danger delete-item ml-2'><i class='fas fa-trash'></i></a>";
 
                 return $edit.$delete;
             })
-            ->addColumn('icon', function($query){
+            ->addColumn('icon', function ($query) {
                 return '<i class="'.$query->icon.'" style="font-size:30px"></i>';
             })
-            ->addColumn('status', function($query){
-                if($query->status === 1){
+            ->addColumn('status', function ($query) {
+                if ($query->status === 1) {
                     return '<span class="badge badge-primary">Active</span>';
-                }else {
+                } else {
                     return '<span class="badge badge-danger">InActive</span>';
                 }
             })
@@ -56,20 +54,20 @@ class SocialLinkDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('sociallink-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
+            ->setTableId('sociallink-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(0)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->orderBy(0)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload'),
+            ]);
     }
 
     /**
@@ -84,10 +82,10 @@ class SocialLinkDataTable extends DataTable
             Column::make('name'),
             Column::make('status'),
             Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->width(100)
-            ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(100)
+                ->addClass('text-center'),
         ];
     }
 
@@ -96,6 +94,6 @@ class SocialLinkDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'SocialLink_' . date('YmdHis');
+        return 'SocialLink_'.date('YmdHis');
     }
 }

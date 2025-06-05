@@ -28,7 +28,7 @@ class AddressCreateRequest extends FormRequest
             'phone' => ['required', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
             'address' => ['required'],
-            'type' => ['required', 'in:home,office']
+            'type' => ['required', 'in:home,office'],
         ];
     }
 }

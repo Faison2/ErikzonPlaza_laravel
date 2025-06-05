@@ -5,21 +5,23 @@ namespace App\Services;
 use App\Models\Setting;
 use Cache;
 
-class SettingsService {
-
-    function getSettings() {
-        return Cache::rememberForever('settings', function(){
+class SettingsService
+{
+    public function getSettings()
+    {
+        return Cache::rememberForever('settings', function () {
             return Setting::pluck('value', 'key')->toArray(); // ['key' => 'value']
         });
     }
 
-    function setGlobalSettings() : void {
+    public function setGlobalSettings(): void
+    {
         $settings = $this->getSettings();
         config()->set('settings', $settings);
     }
 
-    function clearCachedSettings() : void {
+    public function clearCachedSettings(): void
+    {
         Cache::forget('settings');
     }
-
 }

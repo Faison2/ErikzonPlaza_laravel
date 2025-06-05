@@ -13,12 +13,15 @@ class PaymentGatewaySettingController extends Controller
 {
     use FileUploadTrait;
 
-    function index() : View {
+    public function index(): View
+    {
         $paymentGateway = PaymentGatewaySetting::pluck('value', 'key');
+
         return view('admin.payment-setting.index', compact('paymentGateway'));
     }
 
-    function paypalSettingUpdate(Request $request)  {
+    public function paypalSettingUpdate(Request $request)
+    {
         $validatedData = $request->validate([
             'paypal_status' => ['required', 'boolean'],
             'paypal_account_mode' => ['required', 'in:sandbox,live'],
@@ -30,9 +33,9 @@ class PaymentGatewaySettingController extends Controller
             'paypal_app_id' => ['required'],
         ]);
 
-        if($request->hasFile('paypal_logo')){
+        if ($request->hasFile('paypal_logo')) {
             $request->validate([
-                'paypal_logo' => ['nullable', 'image']
+                'paypal_logo' => ['nullable', 'image'],
             ]);
 
             $imagePath = $this->uploadImage($request, 'paypal_logo');
@@ -43,7 +46,7 @@ class PaymentGatewaySettingController extends Controller
             );
         }
 
-        foreach($validatedData as $key => $value){
+        foreach ($validatedData as $key => $value) {
             PaymentGatewaySetting::updateOrCreate(
                 ['key' => $key],
                 ['value' => $value]
@@ -54,10 +57,12 @@ class PaymentGatewaySettingController extends Controller
         $settingsService->clearCachedSettings();
 
         toastr()->success('Updated Successfully!');
+
         return redirect()->back();
     }
 
-    function stripeSettingUpdate(Request $request)  {
+    public function stripeSettingUpdate(Request $request)
+    {
         $validatedData = $request->validate([
             'stripe_status' => ['required', 'boolean'],
             'stripe_country' => ['required'],
@@ -67,9 +72,9 @@ class PaymentGatewaySettingController extends Controller
             'stripe_secret_key' => ['required'],
         ]);
 
-        if($request->hasFile('stripe_logo')){
+        if ($request->hasFile('stripe_logo')) {
             $request->validate([
-                'paypal_logo' => ['nullable', 'image']
+                'paypal_logo' => ['nullable', 'image'],
             ]);
 
             $imagePath = $this->uploadImage($request, 'stripe_logo');
@@ -80,7 +85,7 @@ class PaymentGatewaySettingController extends Controller
             );
         }
 
-        foreach($validatedData as $key => $value){
+        foreach ($validatedData as $key => $value) {
             PaymentGatewaySetting::updateOrCreate(
                 ['key' => $key],
                 ['value' => $value]
@@ -91,10 +96,12 @@ class PaymentGatewaySettingController extends Controller
         $settingsService->clearCachedSettings();
 
         toastr()->success('Updated Successfully!');
+
         return redirect()->back();
     }
 
-    function razorpaySettingUpdate(Request $request) {
+    public function razorpaySettingUpdate(Request $request)
+    {
         $validatedData = $request->validate([
             'razorpay_status' => ['required', 'boolean'],
             'razorpay_country' => ['required'],
@@ -104,9 +111,9 @@ class PaymentGatewaySettingController extends Controller
             'razorpay_secret_key' => ['required'],
         ]);
 
-        if($request->hasFile('razorpay_logo')){
+        if ($request->hasFile('razorpay_logo')) {
             $request->validate([
-                'razorpay_logo' => ['nullable', 'image']
+                'razorpay_logo' => ['nullable', 'image'],
             ]);
 
             $imagePath = $this->uploadImage($request, 'razorpay_logo');
@@ -117,7 +124,7 @@ class PaymentGatewaySettingController extends Controller
             );
         }
 
-        foreach($validatedData as $key => $value){
+        foreach ($validatedData as $key => $value) {
             PaymentGatewaySetting::updateOrCreate(
                 ['key' => $key],
                 ['value' => $value]
@@ -128,6 +135,7 @@ class PaymentGatewaySettingController extends Controller
         $settingsService->clearCachedSettings();
 
         toastr()->success('Updated Successfully!');
+
         return redirect()->back();
     }
 }

@@ -15,6 +15,6 @@ class AppDownloadSection extends Model
         'title',
         'short_description',
         'play_store_link',
-        'apple_store_link'
+        'apple_store_link',
     ];
 }

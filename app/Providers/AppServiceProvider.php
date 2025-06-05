@@ -26,21 +26,21 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         // Only run this if not in console and the settings table exists
-        if (!App::runningInConsole()) {
-    try {
-        if (Schema::hasTable('settings')) {
-            $keys = ['pusher_app_id', 'pusher_cluster', 'pusher_key', 'pusher_secret'];
-            $pusherConf = Setting::whereIn('key', $keys)->pluck('value', 'key');
+        if (! App::runningInConsole()) {
+            try {
+                if (Schema::hasTable('settings')) {
+                    $keys = ['pusher_app_id', 'pusher_cluster', 'pusher_key', 'pusher_secret'];
+                    $pusherConf = Setting::whereIn('key', $keys)->pluck('value', 'key');
 
-            config(['broadcasting.connections.pusher.key' => $pusherConf['pusher_key'] ?? '']);
-            config(['broadcasting.connections.pusher.secret' => $pusherConf['pusher_secret'] ?? '']);
-            config(['broadcasting.connections.pusher.app_id' => $pusherConf['pusher_app_id'] ?? '']);
-            config(['broadcasting.connections.pusher.options.cluster' => $pusherConf['pusher_cluster'] ?? '']);
+                    config(['broadcasting.connections.pusher.key' => $pusherConf['pusher_key'] ?? '']);
+                    config(['broadcasting.connections.pusher.secret' => $pusherConf['pusher_secret'] ?? '']);
+                    config(['broadcasting.connections.pusher.app_id' => $pusherConf['pusher_app_id'] ?? '']);
+                    config(['broadcasting.connections.pusher.options.cluster' => $pusherConf['pusher_cluster'] ?? '']);
+                }
+            } catch (\Throwable $e) {
+                // Silently ignore if DB or table not ready
+            }
         }
-    } catch (\Throwable $e) {
-        // Silently ignore if DB or table not ready
-    }
-}
 
     }
 }

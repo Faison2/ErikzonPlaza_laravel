@@ -12,17 +12,14 @@ class CustomMailServiceProvider extends ServiceProvider
     /**
      * Register services.
      */
-    public function register(): void
-    {
-
-    }
+    public function register(): void {}
 
     /**
      * Bootstrap services.
      */
     public function boot(): void
     {
-        $mailSetting = Cache::rememberForever('mail_settings', function(){
+        $mailSetting = Cache::rememberForever('mail_settings', function () {
             $key = [
                 'mail_driver',
                 'mail_encryption',
@@ -31,13 +28,13 @@ class CustomMailServiceProvider extends ServiceProvider
                 'mail_password',
                 'mail_port',
                 'mail_receive_address',
-                'mail_username'
+                'mail_username',
             ];
-            
+
             return Setting::whereIn('key', $key)->pluck('value', 'key')->toArray();
         });
 
-        if($mailSetting) {
+        if ($mailSetting) {
             Config::set('mail.mailers.smtp.host', $mailSetting['mail_host']);
             Config::set('mail.mailers.smtp.port', $mailSetting['mail_port']);
             Config::set('mail.mailers.smtp.encryption', $mailSetting['mail_encryption']);

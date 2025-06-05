@@ -10,10 +10,11 @@ use Illuminate\Http\Response;
 
 class ChatController extends Controller
 {
-    function sendMessage(Request $request) {
+    public function sendMessage(Request $request)
+    {
         $request->validate([
             'message' => ['required', 'max:1000'],
-            'receiver_id' => ['required', 'integer']
+            'receiver_id' => ['required', 'integer'],
         ]);
 
         $chat = new Chat();
@@ -29,7 +30,8 @@ class ChatController extends Controller
         return response(['status' => 'success', 'msgId' => $request->msg_temp_id]);
     }
 
-    function getConversation(string $senderId) : Response {
+    public function getConversation(string $senderId): Response
+    {
         $receiverId = auth()->user()->id;
 
         Chat::where('sender_id', $senderId)->where('receiver_id', $receiverId)->where('seen', 0)->update(['seen' => 1]);
@@ -39,6 +41,7 @@ class ChatController extends Controller
             ->with(['sender'])
             ->orderBy('created_at', 'asc')
             ->get();
+
         return response($messages);
     }
 }

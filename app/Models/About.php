@@ -14,6 +14,6 @@ class About extends Model
         'title',
         'main_title',
         'description',
-        'video_link'
+        'video_link',
     ];
 }

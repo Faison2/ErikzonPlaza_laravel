@@ -32,7 +32,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         RTOrderPlacedNotificationEvent::class => [
             RTOrderPlacedNotificationListener::class,
-        ]
+        ],
     ];
 
     /**
