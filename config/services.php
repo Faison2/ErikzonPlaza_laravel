@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'paynow' => [
+        'integration_id' => env('PAYNOW_INTEGRATION_ID'),
+        'integration_key' => env('PAYNOW_INTEGRATION_KEY'),
+        'callback_url' => env('PAYNOW_CALLBACK_URL', 'http://127.0.0.1:8000/dashboard'),
+        'return_url' => env('PAYNOW_RETURN_URL'),
+    ],
+
 ];
