@@ -4,30 +4,32 @@ namespace App\Services;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\Session;
 
 class OrderService
 {
     /** Store Order in Database  */
-    public function createOrder()
+    public function createOrder(): bool
     {
         try {
             $order = new Order();
             $order->invoice_id = generateInvoiceId();
+            $order->internal_id = Session::get('internal_reference');
             $order->user_id = auth()->user()->id;
-            $order->address = session()->get('address');
+            $order->address = session()->get('address') ?? "No address";
             $order->discount = session()->get('coupon')['discount'] ?? 0;
-            $order->delivery_charge = session()->get('delivery_fee');
+            $order->delivery_charge = session()->get('delivery_fee') ?? 0;
             $order->subtotal = cartTotal();
             $order->grand_total = grandCartTotal(session()->get('delivery_fee'));
             $order->product_qty = \Cart::content()->count();
-            $order->payment_method = null;
+            $order->payment_method = session()->get('payment_method') ?? 'Cash';
             $order->payment_status = 'pending';
             $order->payment_approve_date = null;
             $order->transaction_id = null;
-            $order->coupon_info = json_encode(session()->get('coupon'));
+            $order->coupon_info = json_encode(session()->get('coupon')) ?? null;
             $order->currency_name = null;
             $order->order_status = 'pending';
-            $order->address_id = session()->get('address_id');
+            $order->address_id = session()->get('address_id') ?? 0;
             $order->save();
 
             foreach (\Cart::content() as $product) {

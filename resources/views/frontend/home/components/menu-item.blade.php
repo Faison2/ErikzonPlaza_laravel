@@ -19,7 +19,6 @@
                     @foreach ($categories as $category)
                     <button class="{{ $loop->index === 0 ? 'active button-click' : '' }}" data-filter=".{{ $category->slug }}">{{ $category->name }}</button>
                     @endforeach
-
                 </div>
             </div>
         </div>
