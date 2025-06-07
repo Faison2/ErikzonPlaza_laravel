@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\CustomPageController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\PaynowController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Models\Product;
@@ -157,8 +158,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('razorpay-redirect', [PaymentController::class, 'razorpayRedirect'])->name('razorpay-redirect');
     Route::post('razorpay/payment', [PaymentController::class, 'payWithRazorpay'])->name('razorpay.payment');
 
-    Route::post('/payment/initiate', [\App\Http\Controllers\Paynow\PaynowController::class, 'initiate'])->name('paynow.initiate');
-    Route::match(['get', 'post'], '/payment/update', [\App\Http\Controllers\Paynow\PaynowController::class, 'update'])->name('paynow.update');
-    Route::get('/payment/return', [\App\Http\Controllers\Paynow\PaynowController::class, 'return'])->name('paynow.return');
+    Route::post('/payment/initiate', [PaynowController::class, 'initiate'])->name('paynow.initiate');
+    Route::match(['get', 'post'], '/payment/update', [PaynowController::class, 'update'])->name('paynow.update');
+    Route::get('/payment/return', [PaynowController::class, 'return'])->name('paynow.return');
 
 });
