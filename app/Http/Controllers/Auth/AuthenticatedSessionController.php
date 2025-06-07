@@ -34,12 +34,11 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (auth()->user()->isAdminOrSeller()) {
-            return redirect('/admin/dashboard');
+            return redirect()->intended('/admin/dashboard');
         } elseif (auth()->user()->isCustomer()) {
-            return redirect(RouteServiceProvider::HOME);
+            return redirect()->intended(RouteServiceProvider::HOME);
         }
 
-        // Default fallback redirect
         return redirect('/');
     }
 

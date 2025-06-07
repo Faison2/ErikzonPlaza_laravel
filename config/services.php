@@ -34,6 +34,7 @@ return [
     'paynow' => [
         'integration_id' => env('PAYNOW_INTEGRATION_ID'),
         'integration_key' => env('PAYNOW_INTEGRATION_KEY'),
+        'auth_email' => env('PAYNOW_AUTH_EMAIL'),
         'callback_url' => env('PAYNOW_CALLBACK_URL', 'http://127.0.0.1:8000/dashboard'),
         'return_url' => env('PAYNOW_RETURN_URL'),
     ],

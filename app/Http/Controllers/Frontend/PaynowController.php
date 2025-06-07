@@ -30,8 +30,8 @@ class PaynowController extends Controller
 
         // Create payment
         $reference = 'INV'.time();
-        $payment = $this->paynow->createPayment($reference, 'donniecode@gmail.com');
-        $payment->add('Eplaza Checkout #'.$request->user_id, $request->amount);
+        $payment = $this->paynow->createPayment($reference, config('services.paynow.auth_email'));
+        $payment->add('Erickson Plaza Checkout #'.$request->user_id, $request->amount);
 
         // Create pending payment record
         PaynowPayment::create([
@@ -68,8 +68,6 @@ class PaynowController extends Controller
                     'paynow_response' => $status->data(),
                     'paid_at' => now(),
                 ]);
-
-                //               U can insert any other table. this works when payment is successfully.
 
                 return redirect(route('home'))
                     ->with('success', 'Payment was successfully');

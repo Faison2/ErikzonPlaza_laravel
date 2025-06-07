@@ -137,7 +137,8 @@
                             @else
                             <li><a class="common_btn v_submit_button" href="#">add to cart</a></li>
                             @endif
-                            <li><a class="wishlist" href="#"><i class="far fa-heart"></i></a></li>
+{{--                            @endif--}}
+{{--                            <li><a class="wishlist" href="#"><i class="far fa-heart"></i></a></li>--}}
                         </ul>
                     </div>
                 </div>

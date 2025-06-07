@@ -50,12 +50,6 @@ class RegisteredUserController extends Controller
          */
         $user->assignRole($request->user_type);
 
-        $user->seller()->create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'business_address' => $request->business_address,
-        ]);
-
         event(new Registered($user));
 
         $user = $user->fresh();
@@ -63,9 +57,15 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         if ($user->isSeller()) {
-            return redirect(RouteServiceProvider::ADMIN);
+            $user->seller()->create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'business_address' => $request->business_address,
+            ]);
+
+            return redirect()->intended(RouteServiceProvider::ADMIN);
         }
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 }
