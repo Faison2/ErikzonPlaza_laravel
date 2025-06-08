@@ -104,6 +104,8 @@ class PaynowController extends Controller
 
                 $payment->order->fill($update)->saveQuietly();
 
+                Cart::destroy();
+
                 return redirect(route('home'))
                     ->with('success', 'Payment was successfully');
             }
