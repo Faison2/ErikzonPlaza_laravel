@@ -49,6 +49,9 @@
                 </div>
             </form> --}}
 
+            <button class="btn btn-dark d-lg-none m-3" id="sidebarToggleBtn">
+                    Filter Properties
+                </button>
             <div class="row">
 
                  <div class="col-lg-3 sidebar__search" id="sidebar__search">
