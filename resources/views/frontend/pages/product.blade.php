@@ -27,7 +27,9 @@
     ==============================-->
     <section class="fp__search_menu mt_120 xs_mt_90 mb_100 xs_mb_70">
         <div class="container">
-            <form class="fp__search_menu_form" method="GET" action="{{ route('product.index') }}">
+
+            {{-- search area which was removed here --}}
+            {{-- <form class="fp__search_menu_form" method="GET" action="{{ route('product.index') }}">
                 <div class="row">
                     <div class="col-xl-6 col-md-5">
                         <input type="text" placeholder="Search..." name="search" value="{{ @request()->search }}">
@@ -45,11 +47,167 @@
                         <button type="submit" class="common_btn">search</button>
                     </div>
                 </div>
-            </form>
+            </form> --}}
 
             <div class="row">
-                @foreach ($products as $product)
-                <div class="col-xl-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
+
+                 <div class="col-lg-3 sidebar__search" id="sidebar__search">
+                        <div class="close__button" id="closeSidebarBtn">
+                            <button role="button">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <h4>Filter Properties</h4>
+                        <div class="search__inputs my-3">
+                            <div class="input-group mb-3">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Search On EricksonPlaza"
+                                    aria-label="Search On EricksonPlaza"
+                                    aria-describedby="button-addon2"
+                                >
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="categories__box">
+                            <h5 class="border-1 border-bottom pb-2 mb-2">Categories</h5>
+                            <div class="category_list">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="checkChecked"
+                                    >
+                                    <label class="form-check-label" for="checkChecked">
+                                        Electronics and Gadgets
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="checkChecked"
+                                    >
+                                    <label class="form-check-label" for="checkChecked">
+                                        Fashion and Apparel
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="checkChecked"
+                                    >
+                                    <label class="form-check-label" for="checkChecked">
+                                        Books and Stationery
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="checkChecked"
+                                        checked
+                                    >
+                                    <label class="form-check-label" for="checkChecked">
+                                        Home and Kitchen
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="checkChecked"
+                                    >
+                                    <label class="form-check-label" for="checkChecked">
+                                        Sports and Fitness
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="checkChecked"
+                                    >
+                                    <label class="form-check-label" for="checkChecked">
+                                        Health and Beauty
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="mt-3">Price Filter</h5>
+                        <div class="search__inputs my-3">
+                            <div class="input-group mb-3">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Min Price"
+                                    aria-label="Min Price"
+                                    aria-describedby="button-addon2"
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control left__line"
+                                    placeholder="Min Price"
+                                    aria-label="Min Price"
+                                    aria-describedby="button-addon2"
+                                >
+                                <button class="btn btn-outline-secondary" type="button" id="button-addon2">GO</button>
+                            </div>
+                        </div>
+                        <div class="categories__box">
+                            <h5 class="border-1 border-bottom pb-2 mb-2">Other Categories</h5>
+                            <div class="category_list">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="checkChecked1"
+                                    >
+                                    <label class="form-check-label" for="checkChecked">
+                                        Electronics and Gadgets
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="checkChecked2"
+                                    >
+                                    <label class="form-check-label" for="checkChecked">
+                                        Fashion and Apparel
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="checkChecked3"
+                                    >
+                                    <label class="form-check-label" for="checkChecked">
+                                        Books and Stationery
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+               <div class="col-lg-9 col-md-12 col-12">
+                <div class="row">
+                     @foreach ($products as $product)
+                <div class="col-xl-4 col-lg-4 col-md-3 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
                     <div class="fp__menu_item">
                         <div class="fp__menu_item_img">
                             <img src="{{ asset($product->thumb_image) }}" alt="{{ $product->name }}" class="img-fluid w-100">
@@ -87,6 +245,8 @@
                 @if (count($products) === 0)
                 <h4 class="text-center mt-5">No Product Found!</h4>
                 @endif
+               </div>
+                </div>
 
             </div>
             @if ($products->hasPages())
