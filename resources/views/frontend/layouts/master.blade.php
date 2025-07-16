@@ -71,130 +71,158 @@
     <!--=============================
         TOPBAR START
     ==============================-->
-        <section class="fp__topbar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 col-md-8">
-                        <ul class="fp__topbar_info d-flex flex-wrap">
-                            @if (config('settings.site_email') != NULL)
-                            <li><a href="mailto:{{ config('settings.site_email') }}"><i class="fas fa-envelope"></i> {{ config('settings.site_email') }}</a>
+    <section class="fp__topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-md-8">
+                    <ul class="fp__topbar_info d-flex flex-wrap">
+                        @if (config('settings.site_email') != null)
+                            <li><a href="mailto:{{ config('settings.site_email') }}"><i class="fas fa-envelope"></i>
+                                    {{ config('settings.site_email') }}</a>
                             </li>
-                            @endif
-                            @if (config('settings.site_phone') != NULL)
-                            <li><a href="callto:{{ config('settings.site_phone') }}"><i class="fas fa-phone-alt"></i> {{ config('settings.site_phone') }}</a></li>
-                            @endif
-                        </ul>
-                    </div>
-                    @php
-                        $socials = \App\Models\SocialLink::where('status', 1)->get();
-                    @endphp
-                    <div class="col-xl-6 col-md-4 d-none d-md-block">
-                        <ul class="topbar_icon d-flex flex-wrap">
-                            @foreach ($socials as $link)
+                        @endif
+                        @if (config('settings.site_phone') != null)
+                            <li><a href="callto:{{ config('settings.site_phone') }}"><i class="fas fa-phone-alt"></i>
+                                    {{ config('settings.site_phone') }}</a></li>
+                        @endif
+                    </ul>
+                </div>
+                @php
+                    $socials = \App\Models\SocialLink::where('status', 1)->get();
+                @endphp
+                <div class="col-xl-6 col-md-4 d-none d-md-block">
+                    <ul class="topbar_icon d-flex flex-wrap">
+                        @foreach ($socials as $link)
                             <li><a href="{{ $link->link }}"><i class="{{ $link->icon }}"></i></a> </li>
-                            @endforeach
+                        @endforeach
 
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
             </div>
-        </section>
-        <!--=============================
+        </div>
+    </section>
+    <!--=============================
         TOPBAR END
     ==============================-->
 
 
-        <!--=============================
+    <!--=============================
         MENU START
     ==============================-->
-        @include('frontend.layouts.menu')
-        <!--=============================
+    @include('frontend.layouts.menu')
+    <!--=============================
         MENU END
     ==============================-->
 
 
-        @yield('content')
+    @yield('content')
 
 
-        <!--=============================
+    <!--=============================
         FOOTER START
     ==============================-->
-        @include('frontend.layouts.footer')
-        <!--=============================
+    @include('frontend.layouts.footer')
+    <!--=============================
         FOOTER END
     ==============================-->
 
 
-        <!--=============================
+    <!--=============================
         SCROLL BUTTON START
     ==============================-->
-        <div class="fp__scroll_btn">
-            go to top
-        </div>
-        <!--=============================
+    <div class="fp__scroll_btn">
+        go to top
+    </div>
+    <!--=============================
         SCROLL BUTTON END
     ==============================-->
 
 
-        <!--jquery library js-->
-        <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
-        <!--bootstrap js-->
-        <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
-        <!--font-awesome js-->
-        <script src="{{ asset('frontend/js/Font-Awesome.js') }}"></script>
-        <!-- slick slider -->
-        <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
-        <!-- isotop js -->
-        <script src="{{ asset('frontend/js/isotope.pkgd.min.js') }}"></script>
-        <!-- simplyCountdownjs -->
-        <script src="{{ asset('frontend/js/simplyCountdown.js') }}"></script>
-        <!-- counter up js -->
-        <script src="{{ asset('frontend/js/jquery.waypoints.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/jquery.countup.min.js') }}"></script>
-        <!-- nice select js -->
-        <script src="{{ asset('frontend/js/jquery.nice-select.min.js') }}"></script>
-        <!-- venobox js -->
-        <script src="{{ asset('frontend/js/venobox.min.js') }}"></script>
-        <!-- sticky sidebar js -->
-        <script src="{{ asset('frontend/js/sticky_sidebar.js') }}"></script>
-        <!-- wow js -->
-        <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
-        <!-- ex zoom js -->
-        <script src="{{ asset('frontend/js/jquery.exzoom.js') }}"></script>
+    <!--jquery library js-->
+    <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
+    <!--bootstrap js-->
+    <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
+    <!--font-awesome js-->
+    <script src="{{ asset('frontend/js/Font-Awesome.js') }}"></script>
+    <!-- slick slider -->
+    <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
+    <!-- isotop js -->
+    <script src="{{ asset('frontend/js/isotope.pkgd.min.js') }}"></script>
+    <!-- simplyCountdownjs -->
+    <script src="{{ asset('frontend/js/simplyCountdown.js') }}"></script>
+    <!-- counter up js -->
+    <script src="{{ asset('frontend/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.countup.min.js') }}"></script>
+    <!-- nice select js -->
+    <script src="{{ asset('frontend/js/jquery.nice-select.min.js') }}"></script>
+    <!-- venobox js -->
+    <script src="{{ asset('frontend/js/venobox.min.js') }}"></script>
+    <!-- sticky sidebar js -->
+    <script src="{{ asset('frontend/js/sticky_sidebar.js') }}"></script>
+    <!-- wow js -->
+    <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
+    <!-- ex zoom js -->
+    <script src="{{ asset('frontend/js/jquery.exzoom.js') }}"></script>
 
-        <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <!--main/custom js-->
-        <script src="{{ asset('frontend/js/main.js') }}"></script>
+    <!--main/custom js-->
+    <script src="{{ asset('frontend/js/main.js') }}"></script>
 
-        <!-- show dynamic validation message-->
-        <script>
-            toastr.options.progressBar = true;
+    <!-- show dynamic validation message-->
+    <script>
+        toastr.options.progressBar = true;
 
-            @if ($errors->any())
-                @foreach ($errors->all() as $error)
-                    toastr.error("{{ $error }}")
-                @endforeach
-            @endif
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}")
+            @endforeach
+        @endif
 
-            // Set csrf at ajax header
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+        // Set csrf at ajax header
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
-            $(document).ready(function(){
-                $('.button-click').click();
-            })
-        </script>
+        $(document).ready(function() {
+            $('.button-click').click();
+        })
 
-        <!-- Load global js -->
-        @include('frontend.layouts.global-scripts')
+        const sidebar = document.getElementById("sidebar");
+        const openBtn = document.getElementById("openSidebar");
+        const closeBtn = document.getElementById("closeSidebar");
 
-        @stack('scripts')
+        openBtn.addEventListener("click", () => {
+            sidebar.classList.add("active");
+        });
+
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.remove("active");
+        });
+
+        const Sidebar = document.getElementById("sidebar__search");
+        const toggleBtn = document.getElementById("sidebarToggleBtn");
+        const CloseBtn = document.getElementById("closeSidebarBtn");
+
+        toggleBtn.addEventListener("click", () => {
+            Sidebar.classList.add("active");
+            document.body.classList.add("sidebar-open");
+        });
+
+        CloseBtn.addEventListener("click", () => {
+            Sidebar.classList.remove("active");
+            document.body.classList.remove("sidebar-open");
+        });
+    </script>
+
+    <!-- Load global js -->
+    @include('frontend.layouts.global-scripts')
+
+    @stack('scripts')
 </body>
 
 </html>

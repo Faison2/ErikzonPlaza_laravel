@@ -2,7 +2,7 @@
     $MainMenu = Menu::getByName('main_menu');
 @endphp
 
-<nav class="navbar navbar-expand-lg main_menu">
+{{-- <nav class="navbar navbar-expand-lg main_menu">
     <div class="container">
     <a class="navbar-brand" href="{{ url('/') }}">
     <img src="{{ asset('frontend/images/logo.svg') }}" alt="EricksonPlaza" class="img-fluid">
@@ -74,7 +74,84 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> --}}
+
+ <header id="navigation__section">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                    <!-- Amazon Logo -->
+                    <div class="left__logo">
+                        <a class="navbar-brand d-flex align-items-center" href="#">
+                            <img src="{{ asset("frontend/images/erickson.png")}}" alt="ep-logo" class="img-fluid">
+                        </a>
+                    </div>
+                    <!-- Search Bar -->
+                    <div class="center_search">
+                        <form class="d-flex flex-grow-1 mx-2" role="search">
+                            <div class="input-group search__area">
+                                <input
+                                    class="form-control"
+                                    type="search"
+                                    placeholder="Search For Product on EricksonPlaza"
+                                    aria-label="Search"
+                                >
+                                <button class="btn" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Right Side -->
+                    <div class="right__menuIcons">
+                        <ul class="navbar-nav ms-auto align-items-center flex-row">
+                            <li class="nav-item">
+                                <a class="nav-link text position-relative" href="#">
+                                    <i class="fas fa-envelope fa-lg"></i>
+                                    <span class="position-absolute top-25 start-75 translate-middle badge rounded-pill bg-danger text-white" style="font-size: 0.75rem">
+                                        3
+                                    </span
+                  >
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="openSidebar" class="nav-link text position-relative" href="#">
+                                    <i class="fas fa-shopping-cart fa-lg"></i>
+                                    <span class="position-absolute top-25 start-75 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 0.75rem">
+                                        0
+                                    </span
+                  >
+                                </a>
+                                <div id="sidebar" class="sidebar">
+                                    <button id="closeSidebar" class="btn close-btn">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                    <div class="sidebar-content p-4">
+                                        <h4 class="mb-4">
+                                            Total Item
+                                            <span>(5)</span>
+                                        </h5>
+                                        <h5>
+                                            <span>Sub Total</span>
+                                            <span>$20</span>
+                                        </h5>
+                                        <div class="view__cart">
+                                            <a href="#" class="btn w-100">
+                                                View Cart
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <i class="fas fa-user fa-lg"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
 <div class="fp__menu_cart_area">
     <div class="fp__menu_cart_boody">

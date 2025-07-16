@@ -28,6 +28,7 @@
         OFFER ITEM END
         ==============================-->
 
+        @include('frontend.home.components.cards-front')
 
     <!--=============================
             MENU ITEM START
