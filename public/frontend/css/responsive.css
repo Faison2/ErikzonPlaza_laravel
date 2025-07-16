@@ -692,7 +692,7 @@
     }
 
     .fp__breadcrumb_overlay {
-        padding: 230px 0px 113px 0px;
+        padding: 30px 0px 40px 0px;
     }
 
     .fp__about_us_img {
@@ -1539,7 +1539,7 @@
     }
 
     .fp__breadcrumb_overlay {
-        padding: 155px 0px 87px 0px;
+        padding: 30px 0px 40px 0px;
     }
 
     .fp__about_us_img {
@@ -2561,8 +2561,10 @@
     }
 
     .fp__breadcrumb_overlay {
-        padding: 155px 0px 87px 0px;
+        padding: 30px 0px 40px 0px;
     }
+
+
 
     .fp__about_us_img {
         height: 300px;

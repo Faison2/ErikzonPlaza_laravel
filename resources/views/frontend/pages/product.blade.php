@@ -25,7 +25,8 @@
     <!--=============================
         SEARCH MENU START
     ==============================-->
-    <section class="fp__search_menu mt_120 xs_mt_90 mb_100 xs_mb_70">
+        {{-- <section class="fp__search_menu mt_120 xs_mt_90 mb_100 xs_mb_70"> --}}
+    <section class="fp__search_menu my-5">
         <div class="container">
 
             {{-- search area which was removed here --}}
