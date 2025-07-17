@@ -1,5 +1,10 @@
 @media (min-width: 1200px) and (max-width: 1399.99px) {
 
+
+    .sidebar__content{
+    position: sticky;
+    top: 0;
+}
     /* ======HOME PAGE START====== */
     .fp__banner_text h1 {
         font-size: 50px;
@@ -74,6 +79,11 @@
 }
 
 @media (min-width: 992px) and (max-width: 1199.99px) {
+
+    .sidebar__content{
+    position: sticky;
+    top: 0;
+}
 
     /* ======HOME PAGE START====== */
     .main_menu .navbar-nav .nav-item .nav-link {

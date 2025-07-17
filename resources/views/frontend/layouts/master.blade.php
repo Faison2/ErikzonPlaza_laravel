@@ -12,7 +12,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>{{ config('settings.seo_title') }}</title>
-    <link rel="icon" type="image/png" href="{{ asset(config('settings.favicon')) }}">
+    <link rel="icon" type="image/png" href="{{ asset("frontend/images/ep-web.png") }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/spacing.css') }}">

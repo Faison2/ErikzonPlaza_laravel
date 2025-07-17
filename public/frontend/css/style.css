@@ -2154,12 +2154,10 @@ button {
 
 .fp__single_blog:hover .fp__single_blog_text {
     background: rgb(0, 0, 0);
-    background: linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.8270658605238971) 0%,
-        rgba(0, 0, 0, 0.527345972568715) 67%,
-        rgba(0, 0, 0, 0) 100%
-    );
+    background: linear-gradient(0deg,
+            rgba(0, 0, 0, 0.8270658605238971) 0%,
+            rgba(0, 0, 0, 0.527345972568715) 67%,
+            rgba(0, 0, 0, 0) 100%);
 }
 
 .fp__single_blog:hover ul li,
@@ -6861,15 +6859,16 @@ CHECKOUT PAGE START
 
 }
 
-.active > .page-link, .page-link.active {
+.active>.page-link,
+.page-link.active {
     z-index: 3;
     color: var(--colorWhite);
     background-color: var(--colorPrimary);
     border-color: var(--colorPrimary);
-  }
+}
 
 
-  #rating_input {
+#rating_input {
     width: 100%;
     padding: 12px 20px;
     outline: none;
@@ -6878,15 +6877,15 @@ CHECKOUT PAGE START
     border-radius: 30px;
     font-size: 16px;
     font-weight: 300;
-  }
+}
 
 
 
-  /* Navigation Design */
-
-.navigation__section {
-    position: sticky;
+/* Navigation Design */
+#navigation__section {
+    position: absolute;
     top: 0;
+    width: 100%;
     z-index: 1000;
 }
 
@@ -7002,6 +7001,8 @@ CHECKOUT PAGE START
     transition: right 0.3s ease;
     overflow-y: auto;
 }
+
+
 
 .sidebar.active {
     right: 0;
@@ -7149,28 +7150,34 @@ CHECKOUT PAGE START
 
 }
 
+.sidebar__content {
+    position: sticky;
+    top: 0;
+}
+
 .sidebar__search {
     position: relative;
-    border-right: 1px solid rgb(209, 209, 209);
+    border-right: 1px solid rgb(224, 224, 224);
 }
 
-.sidebar__search .close__button button{
-    position: absolute;
-    top: 1.3rem;
-    right: .8rem;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    background-color: var(--colorRed);
-    transition: all 0.3s ease-in-out;
-    color: var(--colorWhite);
-    display: none;
+.sidebar__search .close__button button {
+	position: absolute;
+	top: .9rem;
+	right: .4rem;
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
+	background-color: var(--colorRed);
+	transition: all 0.3s ease-in-out;
+	color: var(--colorWhite);
+	display: none;
 }
 
-.sidebar__search .close__button button:hover{
+.sidebar__search .close__button button:hover {
     background-color: var(--paraColor);
     color: var(--colorWhite);
 }
+
 .sidebar__search .input-group input {
     background-color: rgb(231, 231, 231);
     font-family: var(--headingFont);
@@ -7178,51 +7185,59 @@ CHECKOUT PAGE START
     border: none;
     outline: none;
 }
+
 .categories__box .category_list input:focus,
-.sidebar__search .input-group input:focus{
+.sidebar__search .input-group input:focus {
     box-shadow: none;
     outline: none;
     border: none;
 }
 
 
-.sidebar__search .input-group input{
-    border: 1px solid #a6a6a6!important;
+.sidebar__search .input-group input {
+    border: 1px solid #a6a6a6 !important;
 }
 
 
 
-.sidebar__search .input-group button{
+.sidebar__search .input-group button {
     background-color: var(--paraColor);
     color: var(--colorWhite);
     font-family: var(--headingFont);
     transition: all 0.3s ease-in-out;
 }
-.sidebar__search .input-group button:hover{
+
+.sidebar__search .input-group button:hover {
     background-color: var(--colorRed);
     color: var(--colorWhite);
     border-color: var(--colorRed);
     outline: none;
 }
 
-.categories__box .category_list  .form-check input{
+.categories__box .category_list .form-check input {
     padding: .5rem;
     border: 1px solid #a6a6a6;
 }
-.categories__box .category_list  .form-check-input:checked {
-	background-color: var(--colorRed);
-	border-color: var(--colorRed);
+
+.categories__box .category_list .form-check-input:checked {
+    background-color: var(--colorRed);
+    border-color: var(--colorRed);
 }
-.categories__box .category_list  .form-check label{
+
+.categories__box .category_list .form-check label {
     font-family: var(--headingFont);
     letter-spacing: 0.002em;
     font-size: 1rem;
 }
+
 /* end of show search */
 
 
- /* Base sidebar layout */
-  .sidebar__search {
+/* Base sidebar layout */
+.sidebar__search {
     transition: transform 0.3s ease;
-  }
+}
 
+#sidebarToggleBtn {
+    font-family: var(--headingFont);
+}
