@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\BannerSliderController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\ClearDatabaseController;
@@ -68,6 +69,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
 
     /** Product Routes */
     Route::resource('product', ProductController::class);
+
+       /** Sub Category Routes */
+Route::resource('subcategory', SubCategoryController::class);   
 
     /** Product Gallery Routes */
     Route::get('product-gallery/{product}', [ProductGalleryController::class, 'index'])->name('product-gallery.show-index');
