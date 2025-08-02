@@ -14,8 +14,18 @@ use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Models\Product;
 use App\Models\Seller;
+<<<<<<< HEAD
 use Illuminate\Support\Facades\Route;
 
+=======
+use App\Models\SellerProduct;
+use App\Models\SellerProductOption;
+use App\Models\SellerProductSize;
+use App\Models\SellerProductSizeOption;
+use App\Models\SellerProductSizeOptionValue;        
+use App\Http\Controllers\Admin\SellerController;
+use App\Http\Controllers\Admin\SubCategoryController;
+>>>>>>> ff872bf7 (Added Sub Categories)
 /*
 |--------------------------------------------------------------------------
 | Web Routes
