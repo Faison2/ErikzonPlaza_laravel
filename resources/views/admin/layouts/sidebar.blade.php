@@ -137,6 +137,10 @@
     <li class="{{ setSidebarActive(['admin.product-sub-categories.*']) }}">
         <a class="nav-link" href="{{ route('admin.subcategory.index') }}">Product Sub Categories</a>
     </li>
+
+    <li class="{{ setSidebarActive(['admin.product.*']) }}">
+        <a class="nav-link" href="{{ route('admin.product.index') }}">Products</a>
+    </li>
     <li class="{{ setSidebarActive(['admin.blogs.*']) }}">
         <a class="nav-link" href="{{ route('admin.blogs.index') }}">All Blogs</a>
     </li>

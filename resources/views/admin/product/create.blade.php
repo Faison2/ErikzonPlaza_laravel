@@ -8,7 +8,7 @@
 
     <div class="card card-primary">
         <div class="card-header">
-            <h4>Create Procut</h4>
+            <h4>Create Product</h4>
 
         </div>
         <div class="card-body">
@@ -37,6 +37,17 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label>SubCategory</label>
+                    <select name="sub_category" class="form-control" required>
+                        <option value="">Select</option>
+                        @foreach ($subcategories as $sub)
+                            <option value="{{ $sub->id }}">{{ $sub->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
 
                 <div class="form-group">
                     <label>Price</label>
