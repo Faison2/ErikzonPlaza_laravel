@@ -1,4 +1,3 @@
-
 @extends('frontend.layouts.master')
 
 @section('content')
@@ -32,11 +31,20 @@
                 <div class="row wow fadeInUp" data-wow-duration="1s">
                     <div class="col-xxl-5 col-xl-6 col-md-9 col-lg-7 m-auto">
                         <div class="fp__login_area">
-                            <h2>Welcome back!</h2>
+                            <h2>Welcome!</h2>
                             <p>sign in to continue</p>
                             <form action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <div class="row">
+                                <div class="col-xl-12">
+                                        <div class="fp__login_imput">
+                                            <label>Login As</label>
+                                            <select name="role" id="role" class="nice-select" required>
+                                                <option value="admin">Admin</option>
+                                                <option value="seller">Seller</option>
+                                                <option value="customer">Customer</option>
+                                            </select>
+                                        </div>
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <label>email</label>
@@ -51,13 +59,16 @@
                                         </div>
                                     </div>
 
+                                    
+                                    </div>
+
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput fp__login_check_area">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value=""
                                                     id="flexCheckDefault" name="remember">
                                                 <label class="form-check-label" for="flexCheckDefault">
-                                                    Remeber Me
+                                                    Remember Me
                                                 </label>
                                             </div>
                                             <a href="{{ route('password.request') }}">Forgot Password ?</a>
@@ -73,7 +84,7 @@
                             </form>
                             <p class="or"><span>or</span></p>
 
-                            <p class="create_account">Dont’t have an aceount ? <a href="{{ route('register') }}">Create Account</a>
+                            <p class="create_account">Don’t have an account? <a href="{{ route('register') }}">Create Account</a>
                             </p>
                         </div>
                     </div>

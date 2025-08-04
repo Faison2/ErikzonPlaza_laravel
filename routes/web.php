@@ -18,7 +18,14 @@ use App\Models\ProductOption;
 use App\Models\ProductSize;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
+use App\Models\Seller;
+use App\Models\SellerProduct;
+use App\Models\SellerProductOption;
+use App\Models\SellerProductSize;
+use App\Models\SellerProductSizeOption;
+use App\Models\SellerProductSizeOptionValue;        
+use App\Http\Controllers\Admin\SellerController;
+use App\Http\Controllers\Admin\SubCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +36,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('sellers', SellerController::class);
+});
 
 /** Admin Auth Routes */
 Route::group(['middleware' => 'guest'], function () {
@@ -44,6 +54,26 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('address', [DashboardController::class, 'createAddress'])->name('address.store');
     Route::put('address/{id}/edit', [DashboardController::class, 'updateAddress'])->name('address.update');
     Route::delete('address/{id}', [DashboardController::class, 'destroyAddress'])->name('address.destroy');
+
+    /** Chat Routes */
+    Route::post('chat/send-message', [ChatController::class, 'sendMessage'])->name('chat.send-message');
+    Route::get('chat/get-conversation/{senderId}',[ChatController::class, 'getConversation'])->name('chat.get-conversation');
+});
+
+ /** Seller Auth Routes */
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('admin/login', [AdminAuthController::class, 'index'])->name('admin.login');
+    Route::get('admin/forget-password', [AdminAuthController::class, 'forgetPassword'])->name('admin.forget-password');
+});
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::put('profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::put('profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+    Route::post('profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
+    Route::post('address', [DashboardController::class, 'createAddress'])->name('address.store');
+    Route::put('address/{id}/edit', [DashboardController::class, 'updateAddress'])->name('address.update');
+    Route::delete('address/{id}', [DashboardController::class, 'destroyAddress'])->name('address.destroy');   
 
     /** Chat Routes */
     Route::post('chat/send-message', [ChatController::class, 'sendMessage'])->name('chat.send-message');
