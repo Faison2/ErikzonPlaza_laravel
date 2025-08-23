@@ -55,4 +55,18 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    protected function redirectToDashboard(User $user)
+{
+    if ($user->hasRole('admin')) {
+        return '/admin/dashboard';
+    }
+
+    if ($user->hasRole('user')) {
+        return '/user/dashboard';
+    }
+
+    return '/';
+}
+
 }

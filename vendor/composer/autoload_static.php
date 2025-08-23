@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
+class ComposerStaticInit88571db3891b56d1c30439e049bd4284
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -44,9 +44,11 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'a1cfe24d14977df6878b9bf804af2d1c' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Phpunit/Autoload.php',
+        'b9fa40d76e3a17d43fa5f112ac14719d' => __DIR__ . '/..' . '/paynow/php-sdk/src/helper.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '13906c19e3d8fcd1341b24ed4d51cf72' => __DIR__ . '/..' . '/razorpay/razorpay/Deprecated.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
+        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         '101b35f72e0ccb1b5ef72aa86bba3ef9' => __DIR__ . '/..' . '/yoeunes/toastr/src/helpers.php',
         '1a40138235164aca81af1edc13a4005f' => __DIR__ . '/../..' . '/app/Helpers/global_helper.php',
     );
@@ -114,6 +116,7 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
             'Symfony\\Component\\Clock\\' => 24,
             'Stripe\\' => 7,
             'Srmklive\\PayPal\\' => 16,
+            'Spatie\\Permission\\' => 18,
             'Spatie\\LaravelIgnition\\' => 23,
             'Spatie\\Ignition\\' => 16,
             'Spatie\\FlareClient\\' => 19,
@@ -141,6 +144,7 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
+            'Paynow\\' => 7,
             'PHPStan\\PhpDocParser\\' => 21,
         ),
         'O' => 
@@ -407,6 +411,10 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         array (
             0 => __DIR__ . '/..' . '/srmklive/paypal/src',
         ),
+        'Spatie\\Permission\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-permission/src',
+        ),
         'Spatie\\LaravelIgnition\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
@@ -493,6 +501,10 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
+        ),
+        'Paynow\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paynow/php-sdk/src',
         ),
         'PHPStan\\PhpDocParser\\' => 
         array (
@@ -750,6 +762,7 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'App\\DataTables\\ReservationTimeDataTable' => __DIR__ . '/../..' . '/app/DataTables/ReservationTimeDataTable.php',
         'App\\DataTables\\SliderDataTable' => __DIR__ . '/../..' . '/app/DataTables/SliderDataTable.php',
         'App\\DataTables\\SocialLinkDataTable' => __DIR__ . '/../..' . '/app/DataTables/SocialLinkDataTable.php',
+        'App\\DataTables\\SubCategoryDataTable' => __DIR__ . '/../..' . '/app/DataTables/SubCategoryDataTable.php',
         'App\\DataTables\\SubscriberDataTable' => __DIR__ . '/../..' . '/app/DataTables/SubscriberDataTable.php',
         'App\\DataTables\\TestimonialDataTable' => __DIR__ . '/../..' . '/app/DataTables/TestimonialDataTable.php',
         'App\\DataTables\\TodaysOrderDataTable' => __DIR__ . '/../..' . '/app/DataTables/TodaysOrderDataTable.php',
@@ -795,6 +808,7 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'App\\Http\\Controllers\\Admin\\SettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SettingController.php',
         'App\\Http\\Controllers\\Admin\\SliderController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SliderController.php',
         'App\\Http\\Controllers\\Admin\\SocialLinkController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SocialLinkController.php',
+        'App\\Http\\Controllers\\Admin\\SubCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/SubCategoryController.php',
         'App\\Http\\Controllers\\Admin\\TestimonialController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TestimonialController.php',
         'App\\Http\\Controllers\\Admin\\TramsAndConditionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TramsAndConditionController.php',
         'App\\Http\\Controllers\\Admin\\WhyChooseUsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/WhyChooseUsController.php',
@@ -816,6 +830,7 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'App\\Http\\Controllers\\Frontend\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/DashboardController.php',
         'App\\Http\\Controllers\\Frontend\\FrontendController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/FrontendController.php',
         'App\\Http\\Controllers\\Frontend\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/PaymentController.php',
+        'App\\Http\\Controllers\\Frontend\\PaynowController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/PaynowController.php',
         'App\\Http\\Controllers\\Frontend\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/ProfileController.php',
         'App\\Http\\Controllers\\Frontend\\WishlistController' => __DIR__ . '/../..' . '/app/Http/Controllers/Frontend/WishlistController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -850,6 +865,8 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'App\\Http\\Requests\\Admin\\SliderCreateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/SliderCreateRequest.php',
         'App\\Http\\Requests\\Admin\\SliderUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/SliderUpdateRequest.php',
         'App\\Http\\Requests\\Admin\\SocialLinkStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/SocialLinkStoreRequest.php',
+        'App\\Http\\Requests\\Admin\\SubCategoryCreateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/SubCategoryCreateRequest.php',
+        'App\\Http\\Requests\\Admin\\SubCategoryUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/SubCategoryUpdateRequest.php',
         'App\\Http\\Requests\\Admin\\TestimonialCreateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/TestimonialCreateRequest.php',
         'App\\Http\\Requests\\Admin\\TestimonialUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/TestimonialUpdateRequest.php',
         'App\\Http\\Requests\\Admin\\UpdateBannerSliderRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/UpdateBannerSliderRequest.php',
@@ -870,6 +887,7 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'App\\Models\\Address' => __DIR__ . '/../..' . '/app/Models/Address.php',
         'App\\Models\\AppDownloadSection' => __DIR__ . '/../..' . '/app/Models/AppDownloadSection.php',
         'App\\Models\\BannerSlider' => __DIR__ . '/../..' . '/app/Models/BannerSlider.php',
+        'App\\Models\\BaseModel' => __DIR__ . '/../..' . '/app/Models/BaseModel.php',
         'App\\Models\\Blog' => __DIR__ . '/../..' . '/app/Models/Blog.php',
         'App\\Models\\BlogCategory' => __DIR__ . '/../..' . '/app/Models/BlogCategory.php',
         'App\\Models\\BlogComment' => __DIR__ . '/../..' . '/app/Models/BlogComment.php',
@@ -887,6 +905,7 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'App\\Models\\OrderItem' => __DIR__ . '/../..' . '/app/Models/OrderItem.php',
         'App\\Models\\OrderPlacedNotification' => __DIR__ . '/../..' . '/app/Models/OrderPlacedNotification.php',
         'App\\Models\\PaymentGatewaySetting' => __DIR__ . '/../..' . '/app/Models/PaymentGatewaySetting.php',
+        'App\\Models\\PaynowPayment' => __DIR__ . '/../..' . '/app/Models/PaynowPayment.php',
         'App\\Models\\PrivacyPolicy' => __DIR__ . '/../..' . '/app/Models/PrivacyPolicy.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\ProductGallery' => __DIR__ . '/../..' . '/app/Models/ProductGallery.php',
@@ -895,15 +914,21 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'App\\Models\\ProductSize' => __DIR__ . '/../..' . '/app/Models/ProductSize.php',
         'App\\Models\\Reservation' => __DIR__ . '/../..' . '/app/Models/Reservation.php',
         'App\\Models\\ReservationTime' => __DIR__ . '/../..' . '/app/Models/ReservationTime.php',
+        'App\\Models\\Scopes\\IsVisibleToUserScope' => __DIR__ . '/../..' . '/app/Models/Scopes/IsVisibleToUserScope.php',
         'App\\Models\\SectionTitle' => __DIR__ . '/../..' . '/app/Models/SectionTitle.php',
         'App\\Models\\Seller' => __DIR__ . '/../..' . '/app/Models/Seller.php',
         'App\\Models\\Setting' => __DIR__ . '/../..' . '/app/Models/Setting.php',
+        'App\\Models\\ShoppingCart' => __DIR__ . '/../..' . '/app/Models/ShoppingCart.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\SocialLink' => __DIR__ . '/../..' . '/app/Models/SocialLink.php',
+        'App\\Models\\SubCategory' => __DIR__ . '/../..' . '/app/Models/SubCategory.php',
         'App\\Models\\Subscriber' => __DIR__ . '/../..' . '/app/Models/Subscriber.php',
         'App\\Models\\Testimonial' => __DIR__ . '/../..' . '/app/Models/Testimonial.php',
+        'App\\Models\\Traits\\CommonModelRelationships' => __DIR__ . '/../..' . '/app/Models/Traits/CommonModelRelationships.php',
         'App\\Models\\TramsAndCondition' => __DIR__ . '/../..' . '/app/Models/TramsAndCondition.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\UserPermission' => __DIR__ . '/../..' . '/app/Models/UserPermission.php',
+        'App\\Models\\UserRole' => __DIR__ . '/../..' . '/app/Models/UserRole.php',
         'App\\Models\\WhyChooseUs' => __DIR__ . '/../..' . '/app/Models/WhyChooseUs.php',
         'App\\Models\\Wishlist' => __DIR__ . '/../..' . '/app/Models/Wishlist.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -918,8 +943,13 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'App\\Services\\PaymentGatewaySettingService' => __DIR__ . '/../..' . '/app/Services/PaymentGatewaySettingService.php',
         'App\\Services\\SettingsService' => __DIR__ . '/../..' . '/app/Services/SettingsService.php',
         'App\\Traits\\FileUploadTrait' => __DIR__ . '/../..' . '/app/Traits/FileUploadTrait.php',
+        'App\\Traits\\UserCreatedTrait' => __DIR__ . '/../..' . '/app/Traits/UserCreatedTrait.php',
         'App\\View\\Components\\AppLayout' => __DIR__ . '/../..' . '/app/View/Components/AppLayout.php',
         'App\\View\\Components\\GuestLayout' => __DIR__ . '/../..' . '/app/View/Components/GuestLayout.php',
+        'App\\View\\Components\\InputError' => __DIR__ . '/../..' . '/app/View/Components/InputError.php',
+        'App\\View\\Components\\InputLabel' => __DIR__ . '/../..' . '/app/View/Components/InputLabel.php',
+        'App\\View\\Components\\PrimaryButton' => __DIR__ . '/../..' . '/app/View/Components/PrimaryButton.php',
+        'App\\View\\Components\\TextInput' => __DIR__ . '/../..' . '/app/View/Components/TextInput.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Barryvdh\\Debugbar\\Console\\ClearCommand' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Console/ClearCommand.php',
         'Barryvdh\\Debugbar\\Controllers\\AssetController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/AssetController.php',
@@ -1148,6 +1178,7 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\MenuBuilderSeeder' => __DIR__ . '/../..' . '/database/seeders/MenuBuilderSeeder.php',
         'Database\\Seeders\\PaymentGatewaySettingSeeder' => __DIR__ . '/../..' . '/database/seeders/PaymentGatewaySettingSeeder.php',
+        'Database\\Seeders\\PermissionSeeder' => __DIR__ . '/../..' . '/database/seeders/PermissionSeeder.php',
         'Database\\Seeders\\SectionTitleSeeder' => __DIR__ . '/../..' . '/database/seeders/SectionTitleSeeder.php',
         'Database\\Seeders\\SettingSeeder' => __DIR__ . '/../..' . '/database/seeders/SettingSeeder.php',
         'Database\\Seeders\\UserSeeder' => __DIR__ . '/../..' . '/database/seeders/UserSeeder.php',
@@ -5883,6 +5914,24 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'PHPUnit\\Util\\Xml' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/Xml.php',
         'PHPUnit\\Util\\Xml\\Loader' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Xml/Loader.php',
         'PHPUnit\\Util\\Xml\\XmlException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Util/Exception/XmlException.php',
+        'Paynow\\Core\\CanFail' => __DIR__ . '/..' . '/paynow/php-sdk/src/Core/CanFail.php',
+        'Paynow\\Core\\Constants' => __DIR__ . '/..' . '/paynow/php-sdk/src/Core/Constants.php',
+        'Paynow\\Core\\InitResponse' => __DIR__ . '/..' . '/paynow/php-sdk/src/Core/InitResponse.php',
+        'Paynow\\Core\\Logger' => __DIR__ . '/..' . '/paynow/php-sdk/src/Core/Logger.php',
+        'Paynow\\Core\\StatusResponse' => __DIR__ . '/..' . '/paynow/php-sdk/src/Core/StatusResponse.php',
+        'Paynow\\Http\\Client' => __DIR__ . '/..' . '/paynow/php-sdk/src/Http/Client.php',
+        'Paynow\\Http\\ConnectionException' => __DIR__ . '/..' . '/paynow/php-sdk/src/Http/ConnectionException.php',
+        'Paynow\\Http\\RequestInfo' => __DIR__ . '/..' . '/paynow/php-sdk/src/Http/RequestInfo.php',
+        'Paynow\\Payments\\EmptyCartException' => __DIR__ . '/..' . '/paynow/php-sdk/src/Payments/EmptyCartException.php',
+        'Paynow\\Payments\\EmptyTransactionReferenceException' => __DIR__ . '/..' . '/paynow/php-sdk/src/Payments/EmptyTransactionReferenceException.php',
+        'Paynow\\Payments\\FluentBuilder' => __DIR__ . '/..' . '/paynow/php-sdk/src/Payments/FluentBuilder.php',
+        'Paynow\\Payments\\HashMismatchException' => __DIR__ . '/..' . '/paynow/php-sdk/src/Payments/HashMismatchException.php',
+        'Paynow\\Payments\\InvalidIntegrationException' => __DIR__ . '/..' . '/paynow/php-sdk/src/Payments/InvalidIntegrationException.php',
+        'Paynow\\Payments\\InvalidUrlException' => __DIR__ . '/..' . '/paynow/php-sdk/src/Payments/InvalidUrlException.php',
+        'Paynow\\Payments\\NotImplementedException' => __DIR__ . '/..' . '/paynow/php-sdk/src/Payments/NotImplementedException.php',
+        'Paynow\\Payments\\Payment' => __DIR__ . '/..' . '/paynow/php-sdk/src/Payments/Payment.php',
+        'Paynow\\Payments\\Paynow' => __DIR__ . '/..' . '/paynow/php-sdk/src/Payments/Paynow.php',
+        'Paynow\\Util\\Hash' => __DIR__ . '/..' . '/paynow/php-sdk/src/Util/Hash.php',
         'PharIo\\Manifest\\Application' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Application.php',
         'PharIo\\Manifest\\ApplicationName' => __DIR__ . '/..' . '/phar-io/manifest/src/values/ApplicationName.php',
         'PharIo\\Manifest\\Author' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Author.php',
@@ -7616,6 +7665,41 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
         'Spatie\\LaravelIgnition\\Support\\StringComparator' => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition/Support/StringComparator.php',
         'Spatie\\LaravelIgnition\\Views\\BladeSourceMapCompiler' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/BladeSourceMapCompiler.php',
         'Spatie\\LaravelIgnition\\Views\\ViewExceptionMapper' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/ViewExceptionMapper.php',
+        'Spatie\\Permission\\Commands\\CacheReset' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CacheReset.php',
+        'Spatie\\Permission\\Commands\\CreatePermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreatePermission.php',
+        'Spatie\\Permission\\Commands\\CreateRole' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreateRole.php',
+        'Spatie\\Permission\\Commands\\Show' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/Show.php',
+        'Spatie\\Permission\\Commands\\UpgradeForTeams' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/UpgradeForTeams.php',
+        'Spatie\\Permission\\Contracts\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Permission.php',
+        'Spatie\\Permission\\Contracts\\PermissionsTeamResolver' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/PermissionsTeamResolver.php',
+        'Spatie\\Permission\\Contracts\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Role.php',
+        'Spatie\\Permission\\Contracts\\Wildcard' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Wildcard.php',
+        'Spatie\\Permission\\DefaultTeamResolver' => __DIR__ . '/..' . '/spatie/laravel-permission/src/DefaultTeamResolver.php',
+        'Spatie\\Permission\\Events\\PermissionAttached' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Events/PermissionAttached.php',
+        'Spatie\\Permission\\Events\\PermissionDetached' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Events/PermissionDetached.php',
+        'Spatie\\Permission\\Events\\RoleAttached' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Events/RoleAttached.php',
+        'Spatie\\Permission\\Events\\RoleDetached' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Events/RoleDetached.php',
+        'Spatie\\Permission\\Exceptions\\GuardDoesNotMatch' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/GuardDoesNotMatch.php',
+        'Spatie\\Permission\\Exceptions\\PermissionAlreadyExists' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/PermissionAlreadyExists.php',
+        'Spatie\\Permission\\Exceptions\\PermissionDoesNotExist' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/PermissionDoesNotExist.php',
+        'Spatie\\Permission\\Exceptions\\RoleAlreadyExists' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/RoleAlreadyExists.php',
+        'Spatie\\Permission\\Exceptions\\RoleDoesNotExist' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php',
+        'Spatie\\Permission\\Exceptions\\UnauthorizedException' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/UnauthorizedException.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionInvalidArgument' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionInvalidArgument.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionNotImplementsContract' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionNotImplementsContract.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionNotProperlyFormatted' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionNotProperlyFormatted.php',
+        'Spatie\\Permission\\Guard' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Guard.php',
+        'Spatie\\Permission\\Middleware\\PermissionMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middleware/PermissionMiddleware.php',
+        'Spatie\\Permission\\Middleware\\RoleMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middleware/RoleMiddleware.php',
+        'Spatie\\Permission\\Middleware\\RoleOrPermissionMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middleware/RoleOrPermissionMiddleware.php',
+        'Spatie\\Permission\\Models\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Models/Permission.php',
+        'Spatie\\Permission\\Models\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Models/Role.php',
+        'Spatie\\Permission\\PermissionRegistrar' => __DIR__ . '/..' . '/spatie/laravel-permission/src/PermissionRegistrar.php',
+        'Spatie\\Permission\\PermissionServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-permission/src/PermissionServiceProvider.php',
+        'Spatie\\Permission\\Traits\\HasPermissions' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasPermissions.php',
+        'Spatie\\Permission\\Traits\\HasRoles' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasRoles.php',
+        'Spatie\\Permission\\Traits\\RefreshesPermissionCache' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/RefreshesPermissionCache.php',
+        'Spatie\\Permission\\WildcardPermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/WildcardPermission.php',
         'Srmklive\\PayPal\\Facades\\PayPal' => __DIR__ . '/..' . '/srmklive/paypal/src/Facades/PayPal.php',
         'Srmklive\\PayPal\\PayPalFacadeAccessor' => __DIR__ . '/..' . '/srmklive/paypal/src/PayPalFacadeAccessor.php',
         'Srmklive\\PayPal\\Providers\\PayPalServiceProvider' => __DIR__ . '/..' . '/srmklive/paypal/src/Providers/PayPalServiceProvider.php',
@@ -9268,10 +9352,10 @@ class ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit6c0bc1f0024956a45f177d7cf218e95f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit88571db3891b56d1c30439e049bd4284::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit88571db3891b56d1c30439e049bd4284::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit88571db3891b56d1c30439e049bd4284::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit88571db3891b56d1c30439e049bd4284::$classMap;
 
         }, null, ClassLoader::class);
     }
