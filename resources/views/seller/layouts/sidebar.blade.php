@@ -131,10 +131,10 @@
                     <span>Manage Products </span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.category.*']) }}" ><a class="nav-link" href="{{ route('admin.category.index') }}">Product Categories</a></li>
-                    <li class="{{ setSidebarActive(['admin.product-sub-categories.*']) }}">
-        <a class="nav-link" href="{{ route('admin.subcategory.index') }}">Product Sub Categories</a>
-    </li>
-                    
+                   <li class="{{ setSidebarActive(['admin.subcategory.*']) }}">
+    <a class="nav-link" href="{{ route('admin.subcategory.index') }}">Product Sub Categories</a>
+</li>
+
                     <li class="{{ setSidebarActive(['admin.product.*']) }}" ><a class="nav-link" href="{{ route('admin.product.index') }}">Products</a></li>
                     <li class="{{ setSidebarActive(['admin.product-reviews.index']) }}" ><a class="nav-link" href="{{ route('admin.product-reviews.index') }}">Product Reviews</a>
                     </li>

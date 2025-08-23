@@ -124,19 +124,22 @@
 
             <li class="dropdown {{ setSidebarActive([
                 'admin.category.*',
+                'admin.subcategory.*',
                 'admin.product.*',
                 'admin.product-reviews.index',
+                
             ]) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-shopping-cart"></i>
                     <span>Manage Products </span></a>
                <ul class="dropdown-menu">
-    <li class="{{ setSidebarActive(['admin.blog-category.*']) }}">
+    <li class="{{ setSidebarActive(['admin.blog-subcategory.*']) }}">
         <a class="nav-link" href="{{ route('admin.blog-category.index') }}">Categories</a>
     </li>
 
-    <li class="{{ setSidebarActive(['admin.product-sub-categories.*']) }}">
-        <a class="nav-link" href="{{ route('admin.subcategory.index') }}">Product Sub Categories</a>
-    </li>
+    <li class="{{ setSidebarActive(['admin.blog-category.*']) }}">
+    <a class="nav-link" href="{{ route('admin.subcategory.index') }}">Product Sub Categories</a>
+</li>
+
 
     <li class="{{ setSidebarActive(['admin.product.*']) }}">
         <a class="nav-link" href="{{ route('admin.product.index') }}">Products</a>
@@ -145,7 +148,7 @@
         <a class="nav-link" href="{{ route('admin.blogs.index') }}">All Blogs</a>
     </li>
     <li class="{{ setSidebarActive(['admin.blogs.comments.index']) }}">
-        <a class="nav-link" href="{{ route('admin.blogs.comments.index') }}">Comments</a>
+        <a class="nav-link" href="{{ route('admin.subcategory.index') }}">Comments</a>
     </li>
     
 </ul>
