@@ -32,8 +32,9 @@ class ProductController extends Controller
     public function create(): View
     {
         $categories = Category::all();
+        $subcategories = \App\Models\SubCategory::all();
 
-        return view('admin.product.create', compact('categories'));
+        return view('admin.product.create', compact('categories', 'subcategories'));
     }
 
     /**
@@ -49,6 +50,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->slug = generateUniqueSlug('Product', $request->name);
         $product->category_id = $request->category;
+        $product->subcategory_id = $request->subcategory;
         $product->price = $request->price;
         $product->offer_price = $request->offer_price ?? 0;
         $product->quantity = $request->quantity;
@@ -92,6 +94,7 @@ class ProductController extends Controller
         $product->thumb_image = ! empty($imagePath) ? $imagePath : $product->thumb_image;
         $product->name = $request->name;
         $product->category_id = $request->category;
+        $product->subcategory_id = $request->subcategory;
         $product->price = $request->price;
         $product->offer_price = $request->offer_price ?? 0;
         $product->quantity = $request->quantity;

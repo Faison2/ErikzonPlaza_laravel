@@ -39,6 +39,16 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Sub Category</label>
+                    <select name="category" class="form-control select2" id="" >
+                        <option value="">select</option>
+                        @foreach ($subcategories as $subcategory)
+                            <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label>Price</label>
                     <input type="text" name="price" class="form-control" value="{{ old('price') }}">
                 </div>

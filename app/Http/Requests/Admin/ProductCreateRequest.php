@@ -25,6 +25,7 @@ class ProductCreateRequest extends FormRequest
             'image' => ['required', 'image', 'max:3000'],
             'name' => ['required', 'max:255'],
             'category' => ['required', 'integer'],
+            'subcategory' => ['required', 'integer'],
             'price' => ['required', 'numeric'],
             'offer_price' => ['nullable', 'numeric'],
             'quantity' => ['required', 'numeric'],
